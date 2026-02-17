@@ -91,7 +91,7 @@ Es wird empfohlen, eine Beschreibung einzugeben, um dieses Secret unter vielen z
 
 ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/o365_tenant_19.png)
 
-21. Wählen Sie aus den zwei Unterkategorien **Delegated permissions**.
+21. Wählen Sie aus den zwei Unterkategorien **App Permissions**.
 
 ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/o365_tenant_20.png)
 
