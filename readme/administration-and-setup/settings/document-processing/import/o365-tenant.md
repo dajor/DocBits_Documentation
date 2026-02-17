@@ -91,7 +91,7 @@ Het wordt aanbevolen om een beschrijving in te vullen om dit geheim te identific
 
 ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/o365_tenant_19.png)
 
-21. Selecteer uit de twee subcategorieën **Delegated permissions**.
+21. Selecteer uit de twee subcategorieën **App Permissions**.
 
 ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/o365_tenant_20.png)
 
