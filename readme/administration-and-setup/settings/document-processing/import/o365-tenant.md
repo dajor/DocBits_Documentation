@@ -91,7 +91,7 @@
 
 ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/o365_tenant_19.png)
 
-21. Das duas subcategorias, selecione **Delegated permissions**.
+21. Das duas subcategorias, selecione **App Permissions**.
 
 ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/o365_tenant_20.png)
 
