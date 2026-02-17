@@ -91,7 +91,7 @@ Zaleca się wypełnienie opisu, aby zidentyfikować ten sekret wśród wielu (ob
 
 ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/o365_tenant_19.png)
 
-21. Z dwóch podkategorii wybierz **Delegated permissions**.
+21. Z dwóch podkategorii wybierz **App Permissions**.
 
 ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/o365_tenant_20.png)
 
