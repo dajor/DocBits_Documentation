@@ -91,7 +91,7 @@ It is recommended to fill in a description to identify this secret among many (a
 
 <figure><img src="../../../../.gitbook/assets/o365_tenant_19.png" alt=""><figcaption></figcaption></figure>
 
-21. From the two sub-categories, select **Delegated permissions**.
+21. From the two sub-categories, select **App Permissions**.
 
 <figure><img src="../../../../.gitbook/assets/o365_tenant_20.png" alt=""><figcaption></figcaption></figure>
 
