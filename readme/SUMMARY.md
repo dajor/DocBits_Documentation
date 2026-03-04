@@ -8,6 +8,7 @@
   * [DocBits Infor on Premise Customer](overview-and-basics/architecture/docbits-infor-on-premise-customer.md)
   * [Certifications](overview-and-basics/architecture/certifications.md)
   * [Prefect Local Setup Requirements](overview-and-basics/architecture/prefect-local-setup-requirements.md)
+* [Security & Compliance FAQ](overview-and-basics/security-and-compliance-faq.md)
 * [Infor Infrastructure](overview-and-basics/infor-infrastructure.md)
 * [Release Notes](overview-and-basics/release-notes/README.md)
   * [Testing Availability on Sandbox](overview-and-basics/release-notes/testing-availability-on-sandbox.md)
