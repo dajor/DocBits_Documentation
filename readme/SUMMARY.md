@@ -7,6 +7,7 @@
 * [Architettura](overview-and-basics/architecture/README.md)
   * [DocBits Infor on Premise Customer](overview-and-basics/architecture/docbits-infor-on-premise-customer.md)
   * [Certificazioni](overview-and-basics/architecture/certifications.md)
+* [FAQ Sicurezza e Conformità](overview-and-basics/security-and-compliance-faq.md)
 * [Infor Infrastruttura](overview-and-basics/infor-infrastructure.md)
 * [Note della versione](overview-and-basics/release-notes/README.md)
 * [FAQ](overview-and-basics/faq/README.md)
