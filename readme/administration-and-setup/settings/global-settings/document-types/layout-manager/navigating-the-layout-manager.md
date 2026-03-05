@@ -20,7 +20,7 @@
 * Select the document type you want to edit.
 * The Layout Manager will display the structure of that document type.
 
-<figure><img src="../../../../../.gitbook/assets/Bildschirmfoto 2024-05-24 um 10.16.38.png" alt=""><figcaption><p>Layout Manager Invoice</p></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/layout-builder-overview-2026.png" alt=""><figcaption><p>Layout Builder Invoice</p></figcaption></figure>
 
 #### Navigating Groups and Fields:
 
