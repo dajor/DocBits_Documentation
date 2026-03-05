@@ -4,7 +4,7 @@
 
 The Dashboard settings are designed to help administrators control the data presentation and interaction within the DocBits dashboard. These settings determine what information is immediately available upon logging in, ensuring that users have quick access to the most relevant data for their tasks.
 
-<figure><img src="../../../../.gitbook/assets/dashboard_settings_1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/dashboard_settings.png" alt="Dashboard Settings"><figcaption><p>Dashboard Settings Page</p></figcaption></figure>
 
 ## Accessing the Dashboard Settings
 

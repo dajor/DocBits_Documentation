@@ -1,4 +1,6 @@
-# Classification And Extraction
+# Classification and Extraction
+
+<figure><img src="../../../../.gitbook/assets/classification_and_extraction.png" alt="Classification and Extraction"><figcaption><p>Classification and Extraction Page</p></figcaption></figure>
 
 ## Overview
 

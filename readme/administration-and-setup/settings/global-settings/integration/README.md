@@ -1,12 +1,55 @@
-# Integration
+# Integration & SSO
 
-The integration settings play a crucial role in the efficiency and functionality of Docbits as they allow to ensure seamless interaction with other tools and services. Here are some reasons why properly configuring the integration settings is important:
+<figure><img src="../../../../.gitbook/assets/integration_sso.png" alt="Integration & SSO"><figcaption><p>Integration & SSO Page</p></figcaption></figure>
+
+The Integration & SSO page manages API keys for programmatic access, organization IDs, and Single Sign-On (SSO) configuration.
 
 ## API Key
 
-<figure><img src="https://lh7-us.googleusercontent.com/lFBSwUxiK35KkhYh46gw35BsD10rvHK6_1_Tnf449-jd2WJleDhxPzHpUmNdbP1mst5TkLBpGj5iJyiR_Dxpbta6S9p4Rb3FWj7RIc628Kw-RgqpVvLDYggagjuFI1DdLfOJqkTWHBE0JLQRolTWvOc" alt="" width="563"><figcaption></figcaption></figure>
+Manage API keys used for programmatic access to DocBits.
 
-The integration settings play a crucial role in the efficiency and functionality of DocBits as they allow to ensure seamless interaction with other tools and services. Here are some reasons why properly configuring the integration settings is important:
+| Column | Description |
+|--------|-------------|
+| **Key** | The masked API key value. Click the copy icon to copy the full key. |
+| **Name** | A descriptive name for the key. |
+| **Expires** | Expiration date (or "Never"). |
+| **Last Used** | When the key was last used. |
+| **Status** | Active or Inactive. |
+| **Actions** | Three-dot menu to revoke or delete. |
+
+Click **+ Create API Key** to generate a new key.
+
+## ID
+
+Shows your organization identifiers:
+
+| Field | Description |
+|-------|-------------|
+| **Org ID** | Your organization's unique identifier. |
+| **Sub Org ID** | The currently selected sub-organization ID. |
+
+## SSO Service Provider Settings
+
+DocBits SSO configuration values needed when setting up your Identity Provider:
+
+| Field | Description |
+|-------|-------------|
+| **Entity ID** | The SAML metadata URL for DocBits. |
+| **SLO URL** | Single Logout URL. |
+| **SSO URL** | Assertion Consumer Service URL. |
+
+You can also **Download Certificate** and **Download Metadata** for your IdP configuration.
+
+## Identity Service Provider Settings
+
+Configure your external Identity Provider (IdP):
+
+| Field | Description |
+|-------|-------------|
+| **Tenant ID** | Your IdP tenant identifier. |
+| **Upload file** | Upload your IdP metadata XML file. |
+
+Click **Configure** to save your IdP settings.
 
 * **Increased efficiency:** Integration with other tools and services can streamline workflows and increase efficiency. For example, documents can be automatically exchanged between Docbits and a CRM system, reducing manual entry and increasing productivity
 * **Data consistency:** Integration allows data to be exchanged seamlessly between different systems, improving data consistency and accuracy. This avoids inconsistencies or duplicate data entry that could lead to errors.

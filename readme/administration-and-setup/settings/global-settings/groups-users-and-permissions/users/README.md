@@ -1,32 +1,36 @@
 # Users
 
-User Settings is an area in a system where users can adjust personal preferences, account settings, and security settings. Typically, user settings include options such as password changes, profile information, notification preferences, and possibly individual permissions to access certain features or data.
+<figure><img src="../../../../../.gitbook/assets/users_settings.png" alt="Users Management"><figcaption><p>Users Management Page</p></figcaption></figure>
 
-In most organizations, only authorized people have access to user settings, usually administrators or system administrators. This is because the settings may contain sensitive information that could compromise the security of the system if changed by unauthorized persons. Administrators are able to manage user settings to ensure that they comply with organizational policies and requirements and that the integrity of the system is maintained.
+The Users page allows administrators to manage all user accounts in your DocBits organization. Here you can add new users, assign roles, and control access.
 
-<figure><img src="../../../../../.gitbook/assets/Bildschirmfoto 2024-05-08 um 08.21.48.png" alt=""><figcaption></figcaption></figure>
+## User List
 
-1. **Search Bar**: Allows administrators to quickly find users by searching for their names or other details.
-2. **User List**: Displays a list of users with the following columns:
-   * **Name**: The full name of the user.
-   * **Email**: The user's email address, which is likely used as their login identifier.
-   * **Admin**: A checkbox indicating whether the user has administrative privileges. Admins typically have access to all settings and can manage other user accounts.
-   * **Actions**: This column typically includes buttons or links for performing actions such as editing user details, resetting passwords, or deleting the user account.
-3. **Add User Button**: This button is used to create new user accounts. Clicking on it would typically bring up a form where you can enter the new user's details, such as their name, email, and whether they should have admin rights.
+The user table displays the following columns:
 
-## Step-by-step instructions to add a new user:
+| Column | Description |
+|--------|-------------|
+| **Name** | The full name of the user. |
+| **E-Mail** | The user's email address, used as their login identifier. |
+| **Last Login** | Date and time of the user's most recent login. |
+| **Admin** | Checkbox indicating whether the user has administrator privileges. Admins can access all settings and manage other users. |
+| **System Admin** | Checkbox indicating whether the user has system administrator privileges, granting full system-level access. |
+| **Active** | Checkbox showing whether the user account is currently active. Inactive users cannot log in. |
+| **Actions** | Menu with options such as editing user details, resetting passwords, or deactivating the account. |
 
-* **Access User Management:** Navigate to Settings - Global Settings - Groups, User and Permissions - User, where you can add new users.
-* **Add new user:** In the user settings, click on “Add user”
+Use the **Search** bar at the top to quickly find users by name or ID.
 
-<figure><img src="../../../../../.gitbook/assets/Bildschirmfoto 2024-05-16 um 21.29.13.png" alt=""><figcaption></figcaption></figure>
+## Login Analytics
 
-* **Filling out the form:** A form will appear where you can enter the information for the new user. Typical information includes:
+Click **Login Analytics** to view login activity data across your organization, including login frequency and patterns.
 
-<figure><img src="../../../../../.gitbook/assets/Bildschirmfoto 2024-05-16 um 21.39.56.png" alt="" width="375"><figcaption></figcaption></figure>
+## Adding a New User
 
-* **Username:** Unique name for the user used to log in.
-* **First Name and Last Name:** Name of the user.
-* **Email Address:** The user's email address used for communications and notifications.
-* **Password**: A password for the user that should comply with security policies.
-* **User Role:** Set the user's role, e.g. B. Standard user or administrator.
+1. Click the **Add User** button in the top-right corner.
+2. Fill in the required information:
+   * **Username**: A unique name for the user.
+   * **First Name** and **Last Name**: The user's full name.
+   * **Email Address**: Used for login and notifications.
+   * **Password**: Must comply with your organization's security policies.
+   * **User Role**: Assign the appropriate role (Standard User, Admin, or System Admin).
+3. Click **Save** to create the user account. The new user will receive an email notification with their login details.

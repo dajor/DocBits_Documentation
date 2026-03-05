@@ -1,5 +1,7 @@
 # Export Configuration for Supplier Portal
 
+<figure><img src="../../../.gitbook/assets/supplier_export_configuration.png" alt="Supplier Export Configuration"><figcaption><p>Supplier Export Configuration Page</p></figcaption></figure>
+
 ## Overview
 
 The export configuration file is a crucial component in the supplier portal, defining how data is mapped between the supplier portal and the ERP system. This configuration ensures that data is accurately transferred and synchronized across systems, enabling smooth and efficient operations.

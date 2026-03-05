@@ -1,48 +1,43 @@
 # Sub-Organizations
 
-Creating suborganizations within a document management system serves to further organize and differentiate the structure and management of user accounts, documents, and workflows within an organization. Here are some purposes and benefits of creating suborganizations:
+<figure><img src="../../../../../.gitbook/assets/sub_organizations.png" alt="Sub-Organizations"><figcaption><p>Sub-Organizations Page</p></figcaption></figure>
 
-* **Structuring and organization:** Suborganizations make it possible to create a hierarchical structure within the document management system. This can help organize user accounts and documents by department, team, location, or other relevant criteria for clearer and more efficient management.
-* **Permission management:** By creating suborganizations, administrators can set granular permissions and access controls for different groups of users. This means that specific users or groups can only access the documents and resources relevant to their respective sub-organization, improving security and privacy.
-* **Workflows and Collaboration:** Suborganizations can facilitate collaboration and communication within specific teams or departments by centralizing access to shared documents, projects, or tasks. This promotes efficiency and coordination when collaborating on common projects or workflows.
-* **Reporting and analysis:** By organizing user accounts and documents into sub-organizations, detailed reports and analysis can be created on the activities and performance of individual teams or departments. This allows administrators and managers to gain insight into document management system usage at an organizational level.
-* **Scalability and Flexibility:** Sub-organizations provide a scalable structure that can grow with the organization's growth and changes. New teams or departments can be easily added and appropriately integrated into the existing sub-organizational scheme without affecting the overall structure of the document management system.
+Sub-organizations allow you to create a hierarchical structure within DocBits to manage documents, users, and workflows across different departments, teams, or entities.
 
-Overall, suborganizations enable more effective management and organization of user accounts, documents, and workflows within a document management system by improving structure, security, and collaboration.
+## Key Benefits
 
-## How to access this feature
+* **Structured Organization**: Group users and documents by department, location, or business unit.
+* **Granular Permissions**: Control which users can access documents in each sub-organization.
+* **Separate Workflows**: Each sub-organization can have its own document processing rules and configurations.
+* **Reporting**: Generate reports and analytics per sub-organization.
 
-In Settings, Global Settings → Groups, Users and Permissions → Sub-Organizations as shown below.
+## Sub-Organization List
 
-<figure><img src="../../../../../.gitbook/assets/sub_organizations_menu_access.png" alt="Sub-Organizations Menu Access"><figcaption><p>Settings</p></figcaption></figure>
+The table displays all existing sub-organizations with:
 
-You will then be taken to a page that looks similar to this:\
+| Column | Description |
+|--------|-------------|
+| **Name** | The name of the sub-organization. |
+| **Description** | A brief description of the sub-organization's purpose. |
+| **Actions** | Menu with options to edit or delete the sub-organization. |
 
-<figure><img src="../../../../../.gitbook/assets/sub_organizations_list_overview.png" alt="Sub-Organizations List Overview"><figcaption></figcaption></figure>
+Use the **Search** bar to quickly find sub-organizations by name.
 
-This is where you will find your previously created sub-organizations, as well as where you can create new sub-organizations.
+## Creating a New Sub-Organization
 
+1. Click the **+ New** button in the top-right corner.
+2. Enter a **Name** and optional **Description**.
+3. Click **Save** to create the sub-organization.
 
+## Show Cross Organisation Option
 
-### Cross Sub-Organisations Access
+When enabled (toggle at the top of the page), users can access documents across all sub-organizations from a single view.
 
-**Overview:**
-For organizations with multiple sub-organizations enabled, DocBits introduces the **Cross Sub-Organisations** feature. This enhancement allows users to manage documents across all sub-organizations under a single umbrella. **Both administrative and non-administrative users** can now access and view documents from every sub-organization without the need to switch between them individually.
+### How to Use Cross Sub-Organisations
 
-**Benefits:**
+1. Navigate to the **Dashboard**.
+2. In the top-right corner, where sub-organizations can be switched, select **Cross**.
+3. The page reloads, showing documents from all sub-organizations.
+4. To return to a single sub-organization view, deselect the **Cross** option.
 
-* Centralized visibility of all documents across sub-organizations.
-* Simplified navigation to locate specific files.
-* Maintains a comprehensive overview of document activity.
-
-**How to Use:**
-
-1. **Enable Cross Sub-Organisations:**
-   * Navigate to the dashboard.
-   * On the top-right corner, where sub-organizations can be switched, select **Cross**.
-   * The page will reload, granting you access to all documents across all sub-organizations.
-2. **Disable Cross Sub-Organisations (if not needed):**
-   * Return to the top-right corner of the dashboard.
-   * Deselect the **Cross** option to return to viewing a single sub-organization.
-
-<figure><img src="../../../../../.gitbook/assets/cross_sub_organizations_toggle.png" alt="Cross Sub-Organizations Toggle"><figcaption></figcaption></figure>
+This is useful for administrators who need a centralized overview of all documents across the organization.

@@ -1,5 +1,7 @@
 # Supplier General Settings
 
+<figure><img src="../../../.gitbook/assets/supplier_general_settings.png" alt="Supplier General Settings"><figcaption><p>Supplier General Settings Page</p></figcaption></figure>
+
 ### Overview
 
 The **Supplier General Settings** interface provides administrators with essential tools to customize the supplier portal. Key features include the ability to upload a company logo and define the policy and privacy statement. These settings are crucial for maintaining brand consistency and ensuring compliance with legal requirements.

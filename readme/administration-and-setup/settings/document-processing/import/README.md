@@ -1,5 +1,7 @@
 # Import
 
+<figure><img src="../../../../.gitbook/assets/import_settings.png" alt="Import Settings"><figcaption><p>Import Settings Page</p></figcaption></figure>
+
 ## Overview
 
 In the **Import** settings, you can configure document-specific options for importing, or set up automated imports via FTP or email. This page provides a detailed overview of all available settings.

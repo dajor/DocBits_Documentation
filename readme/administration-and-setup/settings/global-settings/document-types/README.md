@@ -4,26 +4,48 @@
 DocBits Document Types Explained: Create, Configure & Assign Processing Settings
 {% endembed %}
 
-<figure><img src="../../../../.gitbook/assets/Bildschirmfoto 2024-08-24 um 22.39.42.png" alt="Document Types"><figcaption><p>Document Types Screenshot </p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/document_types.png" alt="Document Types"><figcaption><p>Document Types Page</p></figcaption></figure>
 
-#### Overview
+## Overview
 
-The Document Types section lists all document types recognized and processed by Docbits. Administrators can manage various aspects such as layout, field definitions, extraction rules, and more for each type of document. This customization is key to ensuring accurate data handling and compliance with organizational standards.
+The Document Types page lists all document types recognized and processed by DocBits. It is divided into two sections:
 
-#### Key Features and Options
+* **Default Document Types**: Pre-configured types provided by DocBits (Invoice, Credit Note, Delivery Note, Order Confirmation, Contract, ZUGFeRD, etc.). These cannot be deleted.
+* **Custom Document Types**: Types you create for your specific business needs. These can be edited and deleted.
 
-1. **Document Type List**:
-   * Each row represents a document type such as Invoice, Credit Note, Delivery Note, etc.
-   * Document types can be standard or custom, as indicated by labels like "Standard."
-2. **Edit layout**: This option allows administrators to modify the document layout settings, which include defining how the document appears and where data fields are located.
-3. **Document Sub Types**: If any document types have subcategories, this option lets admins configure settings specific to each subtype.
-4. **Table columns**: Customize which data columns should appear when the document type is viewed in lists or reports.
-5. **Fields**: Manage the data fields associated with the document type, including adding new fields or modifying existing ones.
-6. **Model Training**: Configure and train the model used for recognizing and extracting data from the documents. This may involve setting parameters for machine learning models that improve over time with more data.
-7. **Regex**: Set up regular expressions that are used to extract data from documents based on patterns. This is particularly useful for structured data extraction.
-8. **Scripts**: Write or modify scripts that run custom processing rules or workflows for documents of this type.
-9. **E-DOC**: Configure settings related to the exchange of documents in standardized electronic formats. You can configure XRechnung, EDI, FakturaPA or EDI
+## Controls per Document Type
+
+Each document type card shows:
+
+| Control | Description |
+|---------|-------------|
+| **Activate** | Toggle to enable or disable this document type for processing. |
+| **Extraction** | Toggle to enable or disable AI-based data extraction for this type. |
+| **Settings** (gear icon) | Open additional configuration options for the document type. |
+
+## Configuration Tabs
+
+Below each document type, you can access the following configuration tabs:
+
+| Tab | Description |
+|-----|-------------|
+| **Labels** | Manage display labels and translations for the document type. |
+| **Edit layout** | Modify how the document appears in the validation view, including field positions. |
+| **Document Sub Types** | Configure subcategories for this document type (e.g., different invoice formats). |
+| **Table columns** | Customize which data columns appear in the line items table. |
+| **Fields** | Manage the data fields extracted from the document (add, edit, or remove fields). |
+| **Model Training** | Configure and train the AI model used for recognizing and extracting data. |
+| **Regex** | Set up regular expressions for pattern-based data extraction. |
+| **Scripts** | Write custom processing scripts that run during document processing. |
+| **E-Doc** | Configure electronic document standards (XRechnung, ZUGFeRD, EDI, FatturaPA). |
+
+## Creating a Custom Document Type
+
+1. Scroll down to the **Custom Document Types** section.
+2. Click **+ New**.
+3. Enter a name for the new document type.
+4. Configure the fields, layout, and extraction settings as needed.
 
 {% hint style="info" %}
-See [Setup Document Type](../../../setup/document-types/)
+See [Setup Document Type](../../../setup/document-types/) for detailed setup instructions.
 {% endhint %}

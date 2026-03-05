@@ -1,10 +1,10 @@
 # Editing Email Templates
 
+<figure><img src="../../../.gitbook/assets/supplier_email_templates.png" alt="Supplier Email Templates"><figcaption><p>Supplier Email Templates Page</p></figcaption></figure>
+
 ### Overview
 
 The Email Templates feature allows administrators to create and customize email communications that are automatically sent to suppliers. One of the key elements used in these templates is the `{{magic_link}}`, which provides a dynamic link tailored to each recipient.
-
-<figure><img src="../../../.gitbook/assets/Bildschirmfoto 2024-08-25 um 12.33.35.png" alt="Supplier Portal - Email Template"><figcaption></figcaption></figure>
 
 #### What is `{{magic_link}}`?
 

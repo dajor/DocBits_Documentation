@@ -1,7 +1,28 @@
-# Rule Manager
+# Rule Management
 
+<figure><img src="../../../../.gitbook/assets/rule_management.png" alt="Rule Management"><figcaption><p>Rule Management Page</p></figcaption></figure>
 
-This document provides an in-depth explanation of the conflict resolution rules used in the DocBits invoicing system. These rules are designed to automatically handle discrepancies between invoice details and purchase order (PO) data, ensuring accurate financial reconciliation. The system applies these rules to process invoice lines, charges, and taxes, and generates appropriate adjustments or notes when necessary.
+Rule Management allows you to create and manage TOML-based conflict resolution rules used during PO matching and document export. Each rule set defines how DocBits handles discrepancies between invoice data and purchase order data.
+
+## Rule List
+
+The main table shows all rule configurations:
+
+| Column | Description |
+|--------|-------------|
+| **Name** | The rule set name. Items tagged **default** are system-provided templates. |
+| **Description** | A summary of what the rule set handles. |
+| **Last Modified By** | The user who last edited this rule set. |
+| **Last Modified At** | Timestamp of the last change. |
+| **Actions** | Three-dot menu to edit, copy, or delete. |
+
+Click **+ New** to create a new rule set, or click an existing name to open the rule editor.
+
+---
+
+## Rule Structure Reference
+
+This section provides an in-depth explanation of the conflict resolution rules used in the DocBits invoicing system. These rules are designed to automatically handle discrepancies between invoice details and purchase order (PO) data, ensuring accurate financial reconciliation. The system applies these rules to process invoice lines, charges, and taxes, and generates appropriate adjustments or notes when necessary.
 
 ## Structure of the Rules
 
