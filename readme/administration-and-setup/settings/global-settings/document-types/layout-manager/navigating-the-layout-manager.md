@@ -20,7 +20,7 @@ Selezionare il Tipo di Documento:
 * Seleziona il tipo di documento che desideri modificare.
 * Il Layout Manager mostrerà la struttura di quel tipo di documento.
 
-![](https://docs.docbits.com/~gitbook/image?url=https%3A%2F%2F578966019-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FT2n2w4uDCJvv7CJ5zrdk%252Fuploads%252FOsXAKJo94rR3WvUfqUXk%252FBildschirmfoto%25202024-05-24%2520um%252010.16.38.png%3Falt%3Dmedia%26token%3Da7944771-aa6e-4e7c-9042-50b87ecce503\&width=768\&dpr=4\&quality=100\&sign=2f86321a\&sv=2)
+<figure><img src="../../../../../.gitbook/assets/layout-builder-overview-2026.png" alt=""><figcaption><p>Layout Builder Invoice</p></figcaption></figure>
 
 Navigare Gruppi e Campi:
 
