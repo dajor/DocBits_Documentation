@@ -1,107 +1,331 @@
-# Estándares de Factura Electrónica Actualmente Compatibles
+# Currently Supported E-Invoice Standards
 
 {% embed url="https://youtu.be/li8KjWO18eU" %}
 DocBits E-Invoice Tutorial: Process XRechnung & ZUGFeRD/Factur-X, Validate Data & Automate Workflows
 {% endembed %}
 
-## Formatos Compatibles
+## Supported Electronic Documents by Country
 
-DocBits admite los siguientes formatos de facturación electrónica:
+DocBits admite **120+** estándares de facturación electrónica y documentos en **30+ países**. La siguiente tabla está organizada por país.
 
-* **FatturaPA**
-* **PEPPOL BIS Billing 3.0**
-* **Factur-X Basic**
-* **EDIFACT INVOIC02**
-* **ZUGFeRD 1.0**
-* **ZUGFeRD 2.1**&#x20;
-* **ZUGFeRD 2.3**&#x20;
-* **XRechnung UBL 1.2**
-* **XRechnung UBL 2.1**
-* **XRechnung UBL 3.0**
+### 🇦🇷 Argentina
 
-## IDs de Personalización Esperados
+| Standard | Estado |
+|---|---|
+| ARGENTINA AFIP | Compatible |
+| ARGENTINA FACTURA ELECTRONICA | Compatible |
 
-Para cada formato compatible, se requieren los siguientes IDs de Personalización:
+### 🇦🇹 Austria
 
-* **PEPPOL BIS Billing 3.0**\
-  El ID de Personalización esperado es:
+| Standard | Estado |
+|---|---|
+| ebInterface 4.3 | Compatible |
+| ebInterface 5.0 | Compatible |
+| ebInterface 6.0 | Compatible |
+| ebInterface 6.1 | Compatible |
 
-```xml
-<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0</cbc:CustomizationID>
-```
+### 🇦🇺 Australia / 🇳🇿 New Zealand
 
-* **Factur-X Basic**\
-  El ID ram esperado es:
+| Standard | Estado |
+|---|---|
+| PINT A-NZ | Compatible |
 
-```xml
-<ram:ID>urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic</ram:ID>
-```
+### 🇧🇷 Brazil
 
-* **ZUGFeRD 1.0**\
-  El ID ram esperado es:
+| Standard | Estado |
+|---|---|
+| CT-e | Compatible |
+| NF-e | Compatible |
+| NFC-e | Compatible |
+| NFS-e | Compatible |
 
-```xml
-<ram:ID>urn:ferd:CrossIndustryDocument:invoice:1p0:
-```
+### 🇨🇱 Chile
 
-* **ZUGFeRD 2.1** \
-  Los IDs ram esperados son:
+| Standard | Estado |
+|---|---|
+| DTE | Compatible |
+| DTE FACTURA | Compatible |
+| FACTURA ELECTRONICA | Compatible |
 
-```xml
-urn:factur-x.eu:1p0:basic</ram:ID>
-urn:factur-x.eu:1p0:basicwl</ram:ID>
-<ram:ID>urn:cen.eu:en16931:2017</ram:ID>
-urn:factur-x.eu:1p0:extended</ram:ID>
-urn:factur-x.eu:1p0:minimum</ram:ID>
-<ram:ID>urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.1</ram:ID>
-```
+### 🇨🇳 China
 
-* **ZUGFeRD 2.3**\
-  El ID ram esperado es:
+| Standard | Estado |
+|---|---|
+| E-FAPIAO | Compatible |
+| FAPIAO | Compatible |
+| GENERAL VAT INVOICE | Compatible |
+| SPECIAL VAT INVOICE | Compatible |
 
-```xml
-urn:zugferd:2p1:comfort
-urn:zugferd:2p1:en16931
-urn:zugferd:2p1:extended
-urn:zugferd:2p1:basic
-```
+### 🇨🇴 Colombia
 
-* **XRechnung UBL 1.2**\
-  El ID de Personalización esperado es:
+| Standard | Estado |
+|---|---|
+| DOCUMENTO SOPORTE | Compatible |
+| FACTURA ELECTRONICA | Compatible |
 
-```xml
-<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_1.X</cbc:CustomizationID>
-```
+### 🇩🇰 Denmark
 
-<pre class="language-xml"><code class="lang-xml"><strong> &#x3C;cbc:CustomizationID>urn:cen.eu:de16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.X&#x3C;/cbc:CustomizationID>
-</strong></code></pre>
+| Standard | Estado |
+|---|---|
+| OIOUBL 2.1 | Compatible |
 
-* **XRechnung UBL 2.1**\
-  El ID de Personalización esperado es:
+### 🇪🇨 Ecuador
 
-<pre class="language-xml"><code class="lang-xml"><strong>&#x3C;cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_2.X&#x3C;/cbc:CustomizationID>
-</strong></code></pre>
+| Standard | Estado |
+|---|---|
+| FACTURA ELECTRONICA | Compatible |
+| SRI | Compatible |
+| SRI 1.0.0 | Compatible |
+| SRI 1.1.0 | Compatible |
+| SRI 2.0.0 | Compatible |
+| SRI 2.1.0 | Compatible |
 
-<pre class="language-xml"><code class="lang-xml"><strong>    &#x3C;cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.X&#x3C;/cbc:CustomizationID>
-</strong></code></pre>
+### 🇪🇸 Spain
 
-* **XRechnung UBL 3.0**\
-  El ID de Personalización esperado es:
+| Standard | Estado |
+|---|---|
+| Facturae | Compatible |
+| Facturae 3.2 | Compatible |
+| Facturae 3.2.1 | Compatible |
+| Facturae 3.2.2 | Compatible |
 
-```xml
-<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.X</cbc:CustomizationID>
+### 🇪🇺 European Union
 
-```
+| Standard | Estado |
+|---|---|
+| PEPPOL BIS 3.0 | Compatible |
 
-*   **EDIFACT INVOIC02**
+### 🇫🇮 Finland
 
-    El ID esperado es:
+| Standard | Estado |
+|---|---|
+| Finvoice 1.3 | Compatible |
+| Finvoice 2.0 | Compatible |
+| Finvoice 2.01 | Compatible |
+| Finvoice 3.0 | Compatible |
+| TEAPPSXML | Compatible |
 
-```xml
-<INVOIC02>
-```
+### 🇫🇷 France
 
-## Hoja de Ruta para la Próxima Implementación
+| Standard | Estado |
+|---|---|
+| Factur-X | Compatible |
+| Factur-X 1.0.05 / ZUGFeRD 2.1 | Compatible |
+| Factur-X 1.0.07.2 / ZUGFeRD 2.3.2 | Compatible |
+
+### 🇩🇪 Germany
+
+| Standard | Estado |
+|---|---|
+| XRechnung 1.0 CII | Compatible |
+| XRechnung 1.0 UBL | Compatible |
+| XRechnung 1.1 CII | Compatible |
+| XRechnung 1.1 UBL | Compatible |
+| XRechnung 1.2 CII | Compatible |
+| XRechnung 1.2 UBL | Compatible |
+| XRechnung 1.2.1 CII | Compatible |
+| XRechnung 1.2.1 UBL | Compatible |
+| XRechnung 1.2.2 CII | Compatible |
+| XRechnung 1.2.2 UBL | Compatible |
+| XRechnung 2.0 CII | Compatible |
+| XRechnung 2.0 UBL | Compatible |
+| XRechnung 2.0.1 CII | Compatible |
+| XRechnung 2.0.1 UBL | Compatible |
+| XRechnung 2.1 CII | Compatible |
+| XRechnung 2.1 UBL | Compatible |
+| XRechnung 2.2 CII | Compatible |
+| XRechnung 2.2 UBL | Compatible |
+| XRechnung 2.3 CII | Compatible |
+| XRechnung 2.3 UBL | Compatible |
+| XRechnung 3.0 CII | Compatible |
+| XRechnung 3.0 UBL | Compatible |
+| XRechnung 3.0.1 CII | Compatible |
+| XRechnung 3.0.1 UBL | Compatible |
+| XRechnung 3.0.2 CII | Compatible |
+| XRechnung 3.0.2 UBL | Compatible |
+| ZUGFeRD 1.0 | Compatible |
+| ZUGFeRD 1.0 Basic | Compatible |
+| ZUGFeRD 1.0 Comfort | Compatible |
+| ZUGFeRD 1.0 Extended | Compatible |
+| ZUGFeRD 2.2 | Compatible |
+| ZUGFeRD 2.3 | Compatible |
+| ZUGFeRD 2.3.2 | Compatible |
+
+### 🇮🇳 India
+
+| Standard | Estado |
+|---|---|
+| GST E-Invoice | Compatible |
+
+### 🇮🇩 Indonesia
+
+| Standard | Estado |
+|---|---|
+| E-Faktur | Compatible |
+
+### 🇮🇹 Italy
+
+| Standard | Estado |
+|---|---|
+| FatturaPA | Compatible |
+
+### 🇯🇵 Japan
+
+| Standard | Estado |
+|---|---|
+| JP PINT | Compatible |
+| JP PINT Self-Billing | Compatible |
+
+### 🇰🇿 Kazakhstan
+
+| Standard | Estado |
+|---|---|
+| ESF | Compatible |
+
+### 🇰🇷 Korea
+
+| Standard | Estado |
+|---|---|
+| E-Tax Invoice | Compatible |
+| NTS | Compatible |
+
+### 🇲🇾 Malaysia
+
+| Standard | Estado |
+|---|---|
+| MyInvois | Compatible |
+
+### 🇲🇽 Mexico
+
+| Standard | Estado |
+|---|---|
+| CFDI 3.3 | Compatible |
+| CFDI 4.0 | Compatible |
+
+### 🇳🇱 Netherlands
+
+| Standard | Estado |
+|---|---|
+| SI-UBL 2.0 | Compatible |
+
+### 🇳🇴 Norway
+
+| Standard | Estado |
+|---|---|
+| EHF Invoice 3.0 | Compatible |
+
+### 🇵🇾 Paraguay
+
+| Standard | Estado |
+|---|---|
+| DTE | Compatible |
+| SIFEN | Compatible |
+| SIFEN 150 | Compatible |
+
+### 🇵🇪 Peru
+
+| Standard | Estado |
+|---|---|
+| CPE | Compatible |
+| CPE UBL 2.0 | Compatible |
+| CPE UBL 2.1 | Compatible |
+| FACTURA ELECTRONICA | Compatible |
+
+### 🇵🇭 Philippines
+
+| Standard | Estado |
+|---|---|
+| EIS | Compatible |
+
+### 🇵🇱 Poland
+
+| Standard | Estado |
+|---|---|
+| KSeF | Compatible |
+| KSeF FA2 | Compatible |
+| KSeF FA3 | Compatible |
+
+### 🇸🇦 Saudi Arabia
+
+| Standard | Estado |
+|---|---|
+| ZATCA Fatoorah | Compatible |
+| ZATCA Reporting | Compatible |
+| ZATCA Simplified | Compatible |
+| ZATCA Tax Invoice | Compatible |
+
+### 🇸🇬 Singapore
+
+| Standard | Estado |
+|---|---|
+| InvoiceNow | Compatible |
+| InvoiceNow SG | Compatible |
+
+### 🇸🇮 Slovenia
+
+| Standard | Estado |
+|---|---|
+| e-SLOG 1.6 | Compatible |
+| e-SLOG 2.0 | Compatible |
+
+### 🇸🇪 Sweden
+
+| Standard | Estado |
+|---|---|
+| Svefaktura 1.0 | Compatible |
+
+### 🇹🇼 Taiwan
+
+| Standard | Estado |
+|---|---|
+| eGUI | Compatible |
+
+### 🇹🇭 Thailand
+
+| Standard | Estado |
+|---|---|
+| E-Tax Invoice | Compatible |
+
+### 🇹🇷 Turkey
+
+| Standard | Estado |
+|---|---|
+| E-Arsiv | Compatible |
+| E-Fatura | Compatible |
+
+### 🇦🇪 United Arab Emirates
+
+| Standard | Estado |
+|---|---|
+| VAT Invoice | Compatible |
+
+### 🇺🇾 Uruguay
+
+| Standard | Estado |
+|---|---|
+| CFE | Compatible |
+| CFE 24 | Compatible |
+| CFE 25 | Compatible |
+| E-Factura | Compatible |
+| E-Nota Credito | Compatible |
+
+### 🇻🇳 Vietnam
+
+| Standard | Estado |
+|---|---|
+| E-Invoice | Compatible |
+
+### International / Multi-Country Standards
+
+| Standard | Estado |
+|---|---|
+| BOD | Compatible |
+| EDI | Compatible |
+| INVOIC02 | Compatible |
+| SPS Commerce RSX 7.7.4 | Compatible |
+| UBL 2.1 | Compatible |
+
+## Roadmap for Upcoming Implementation
 
 {% content-ref url="roadmap.md" %}
 [roadmap.md](roadmap.md)
