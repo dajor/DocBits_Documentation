@@ -1,105 +1,329 @@
 # Currently Supported E-Invoice Standards
 
 {% embed url="https://youtu.be/li8KjWO18eU" %}
-DocBits EDI Configuration Guide: Structure Descriptors, Transformation & Extraction Paths
+DocBits E-Invoice Tutorial: Process XRechnung & ZUGFeRD/Factur-X, Validate Data & Automate Workflows
 {% endembed %}
 
-## Supported Formats
+## Supported Electronic Documents by Country
 
-DocBits supports the following e-invoicing formats:
+DocBits ondersteunt **120+** elektronische facturerings- en documentstandaarden in **30+ landen**. De onderstaande tabel is geordend per land.
 
-* **FatturaPA**
-* **PEPPOL BIS Billing 3.0**
-* **Factur-X Basic**
-* **EDIFACT INVOIC02**
-* **ZUGFeRD 1.0**
-* **ZUGFeRD 2.1**&#x20;
-* **ZUGFeRD 2.3**&#x20;
-* **XRechnung UBL 1.2**
-* **XRechnung UBL 2.1**
-* **XRechnung UBL 3.0**
+### 🇦🇷 Argentina
 
-## Expected Customization IDs
+| Standard | Status |
+|---|---|
+| ARGENTINA AFIP | Ondersteund |
+| ARGENTINA FACTURA ELECTRONICA | Ondersteund |
 
-For each supported format, the following Customization IDs are required:
+### 🇦🇹 Austria
 
-* **PEPPOL BIS Billing 3.0**\
-  The expected Customization ID is:
+| Standard | Status |
+|---|---|
+| ebInterface 4.3 | Ondersteund |
+| ebInterface 5.0 | Ondersteund |
+| ebInterface 6.0 | Ondersteund |
+| ebInterface 6.1 | Ondersteund |
 
-```xml
-<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0</cbc:CustomizationID>
-```
+### 🇦🇺 Australia / 🇳🇿 New Zealand
 
-* **Factur-X Basic**\
-  The expected ram ID is:
+| Standard | Status |
+|---|---|
+| PINT A-NZ | Ondersteund |
 
-```xml
-<ram:ID>urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic</ram:ID>
-```
+### 🇧🇷 Brazil
 
-* **ZUGFeRD 1.0**\
-  The expected ram ID is:
+| Standard | Status |
+|---|---|
+| CT-e | Ondersteund |
+| NF-e | Ondersteund |
+| NFC-e | Ondersteund |
+| NFS-e | Ondersteund |
 
-```xml
-<ram:ID>urn:ferd:CrossIndustryDocument:invoice:1p0:
-```
+### 🇨🇱 Chile
 
-* **ZUGFeRD 2.1** \
-  The expected ram ID's are:
+| Standard | Status |
+|---|---|
+| DTE | Ondersteund |
+| DTE FACTURA | Ondersteund |
+| FACTURA ELECTRONICA | Ondersteund |
 
-```xml
-urn:factur-x.eu:1p0:basic</ram:ID>
-urn:factur-x.eu:1p0:basicwl</ram:ID>
-<ram:ID>urn:cen.eu:en16931:2017</ram:ID>
-urn:factur-x.eu:1p0:extended</ram:ID>
-urn:factur-x.eu:1p0:minimum</ram:ID>
-<ram:ID>urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.1</ram:ID>
-```
+### 🇨🇳 China
 
-* **ZUGFeRD 2.3**\
-  The expected ram ID is:
+| Standard | Status |
+|---|---|
+| E-FAPIAO | Ondersteund |
+| FAPIAO | Ondersteund |
+| GENERAL VAT INVOICE | Ondersteund |
+| SPECIAL VAT INVOICE | Ondersteund |
 
-```xml
-urn:zugferd:2p1:comfort
-urn:zugferd:2p1:en16931
-urn:zugferd:2p1:extended
-urn:zugferd:2p1:basic
-```
+### 🇨🇴 Colombia
 
-* **XRechnung UBL 1.2**\
-  The expected Customization ID is:
+| Standard | Status |
+|---|---|
+| DOCUMENTO SOPORTE | Ondersteund |
+| FACTURA ELECTRONICA | Ondersteund |
 
-```xml
-<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_1.X</cbc:CustomizationID>
-```
+### 🇩🇰 Denmark
 
-<pre class="language-xml"><code class="lang-xml"><strong> &#x3C;cbc:CustomizationID>urn:cen.eu:de16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.X&#x3C;/cbc:CustomizationID>
-</strong></code></pre>
+| Standard | Status |
+|---|---|
+| OIOUBL 2.1 | Ondersteund |
 
-* **XRechnung UBL 2.1**\
-  The expected Customization ID is:
+### 🇪🇨 Ecuador
 
-<pre class="language-xml"><code class="lang-xml"><strong>&#x3C;cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_2.X&#x3C;/cbc:CustomizationID>
-</strong></code></pre>
+| Standard | Status |
+|---|---|
+| FACTURA ELECTRONICA | Ondersteund |
+| SRI | Ondersteund |
+| SRI 1.0.0 | Ondersteund |
+| SRI 1.1.0 | Ondersteund |
+| SRI 2.0.0 | Ondersteund |
+| SRI 2.1.0 | Ondersteund |
 
-<pre class="language-xml"><code class="lang-xml"><strong>    &#x3C;cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.X&#x3C;/cbc:CustomizationID>
-</strong></code></pre>
+### 🇪🇸 Spain
 
-* **XRechnung UBL 3.0**\
-  The expected Customization ID is:
+| Standard | Status |
+|---|---|
+| Facturae | Ondersteund |
+| Facturae 3.2 | Ondersteund |
+| Facturae 3.2.1 | Ondersteund |
+| Facturae 3.2.2 | Ondersteund |
 
-```xml
-<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.X</cbc:CustomizationID>
+### 🇪🇺 European Union
 
-```
+| Standard | Status |
+|---|---|
+| PEPPOL BIS 3.0 | Ondersteund |
 
-*   **EDIFACT INVOIC02**
+### 🇫🇮 Finland
 
-    The expected ID  is:
+| Standard | Status |
+|---|---|
+| Finvoice 1.3 | Ondersteund |
+| Finvoice 2.0 | Ondersteund |
+| Finvoice 2.01 | Ondersteund |
+| Finvoice 3.0 | Ondersteund |
+| TEAPPSXML | Ondersteund |
 
-```xml
-<INVOIC02>
-```
+### 🇫🇷 France
+
+| Standard | Status |
+|---|---|
+| Factur-X | Ondersteund |
+| Factur-X 1.0.05 / ZUGFeRD 2.1 | Ondersteund |
+| Factur-X 1.0.07.2 / ZUGFeRD 2.3.2 | Ondersteund |
+
+### 🇩🇪 Germany
+
+| Standard | Status |
+|---|---|
+| XRechnung 1.0 CII | Ondersteund |
+| XRechnung 1.0 UBL | Ondersteund |
+| XRechnung 1.1 CII | Ondersteund |
+| XRechnung 1.1 UBL | Ondersteund |
+| XRechnung 1.2 CII | Ondersteund |
+| XRechnung 1.2 UBL | Ondersteund |
+| XRechnung 1.2.1 CII | Ondersteund |
+| XRechnung 1.2.1 UBL | Ondersteund |
+| XRechnung 1.2.2 CII | Ondersteund |
+| XRechnung 1.2.2 UBL | Ondersteund |
+| XRechnung 2.0 CII | Ondersteund |
+| XRechnung 2.0 UBL | Ondersteund |
+| XRechnung 2.0.1 CII | Ondersteund |
+| XRechnung 2.0.1 UBL | Ondersteund |
+| XRechnung 2.1 CII | Ondersteund |
+| XRechnung 2.1 UBL | Ondersteund |
+| XRechnung 2.2 CII | Ondersteund |
+| XRechnung 2.2 UBL | Ondersteund |
+| XRechnung 2.3 CII | Ondersteund |
+| XRechnung 2.3 UBL | Ondersteund |
+| XRechnung 3.0 CII | Ondersteund |
+| XRechnung 3.0 UBL | Ondersteund |
+| XRechnung 3.0.1 CII | Ondersteund |
+| XRechnung 3.0.1 UBL | Ondersteund |
+| XRechnung 3.0.2 CII | Ondersteund |
+| XRechnung 3.0.2 UBL | Ondersteund |
+| ZUGFeRD 1.0 | Ondersteund |
+| ZUGFeRD 1.0 Basic | Ondersteund |
+| ZUGFeRD 1.0 Comfort | Ondersteund |
+| ZUGFeRD 1.0 Extended | Ondersteund |
+| ZUGFeRD 2.2 | Ondersteund |
+| ZUGFeRD 2.3 | Ondersteund |
+| ZUGFeRD 2.3.2 | Ondersteund |
+
+### 🇮🇳 India
+
+| Standard | Status |
+|---|---|
+| GST E-Invoice | Ondersteund |
+
+### 🇮🇩 Indonesia
+
+| Standard | Status |
+|---|---|
+| E-Faktur | Ondersteund |
+
+### 🇮🇹 Italy
+
+| Standard | Status |
+|---|---|
+| FatturaPA | Ondersteund |
+
+### 🇯🇵 Japan
+
+| Standard | Status |
+|---|---|
+| JP PINT | Ondersteund |
+| JP PINT Self-Billing | Ondersteund |
+
+### 🇰🇿 Kazakhstan
+
+| Standard | Status |
+|---|---|
+| ESF | Ondersteund |
+
+### 🇰🇷 Korea
+
+| Standard | Status |
+|---|---|
+| E-Tax Invoice | Ondersteund |
+| NTS | Ondersteund |
+
+### 🇲🇾 Malaysia
+
+| Standard | Status |
+|---|---|
+| MyInvois | Ondersteund |
+
+### 🇲🇽 Mexico
+
+| Standard | Status |
+|---|---|
+| CFDI 3.3 | Ondersteund |
+| CFDI 4.0 | Ondersteund |
+
+### 🇳🇱 Netherlands
+
+| Standard | Status |
+|---|---|
+| SI-UBL 2.0 | Ondersteund |
+
+### 🇳🇴 Norway
+
+| Standard | Status |
+|---|---|
+| EHF Invoice 3.0 | Ondersteund |
+
+### 🇵🇾 Paraguay
+
+| Standard | Status |
+|---|---|
+| DTE | Ondersteund |
+| SIFEN | Ondersteund |
+| SIFEN 150 | Ondersteund |
+
+### 🇵🇪 Peru
+
+| Standard | Status |
+|---|---|
+| CPE | Ondersteund |
+| CPE UBL 2.0 | Ondersteund |
+| CPE UBL 2.1 | Ondersteund |
+| FACTURA ELECTRONICA | Ondersteund |
+
+### 🇵🇭 Philippines
+
+| Standard | Status |
+|---|---|
+| EIS | Ondersteund |
+
+### 🇵🇱 Poland
+
+| Standard | Status |
+|---|---|
+| KSeF | Ondersteund |
+| KSeF FA2 | Ondersteund |
+| KSeF FA3 | Ondersteund |
+
+### 🇸🇦 Saudi Arabia
+
+| Standard | Status |
+|---|---|
+| ZATCA Fatoorah | Ondersteund |
+| ZATCA Reporting | Ondersteund |
+| ZATCA Simplified | Ondersteund |
+| ZATCA Tax Invoice | Ondersteund |
+
+### 🇸🇬 Singapore
+
+| Standard | Status |
+|---|---|
+| InvoiceNow | Ondersteund |
+| InvoiceNow SG | Ondersteund |
+
+### 🇸🇮 Slovenia
+
+| Standard | Status |
+|---|---|
+| e-SLOG 1.6 | Ondersteund |
+| e-SLOG 2.0 | Ondersteund |
+
+### 🇸🇪 Sweden
+
+| Standard | Status |
+|---|---|
+| Svefaktura 1.0 | Ondersteund |
+
+### 🇹🇼 Taiwan
+
+| Standard | Status |
+|---|---|
+| eGUI | Ondersteund |
+
+### 🇹🇭 Thailand
+
+| Standard | Status |
+|---|---|
+| E-Tax Invoice | Ondersteund |
+
+### 🇹🇷 Turkey
+
+| Standard | Status |
+|---|---|
+| E-Arsiv | Ondersteund |
+| E-Fatura | Ondersteund |
+
+### 🇦🇪 United Arab Emirates
+
+| Standard | Status |
+|---|---|
+| VAT Invoice | Ondersteund |
+
+### 🇺🇾 Uruguay
+
+| Standard | Status |
+|---|---|
+| CFE | Ondersteund |
+| CFE 24 | Ondersteund |
+| CFE 25 | Ondersteund |
+| E-Factura | Ondersteund |
+| E-Nota Credito | Ondersteund |
+
+### 🇻🇳 Vietnam
+
+| Standard | Status |
+|---|---|
+| E-Invoice | Ondersteund |
+
+### International / Multi-Country Standards
+
+| Standard | Status |
+|---|---|
+| BOD | Ondersteund |
+| EDI | Ondersteund |
+| INVOIC02 | Ondersteund |
+| SPS Commerce RSX 7.7.4 | Ondersteund |
+| UBL 2.1 | Ondersteund |
 
 ## Roadmap for Upcoming Implementation
 
