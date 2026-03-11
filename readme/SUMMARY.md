@@ -480,6 +480,7 @@
   * [WatchDog V2 Configuration](administration-and-setup/setup/watchdog-v2-configuration.md)
   * [WatchDog Admin FAQ](administration-and-setup/setup/watchdog-admin-faq.md)
 * [Report Page](administration-and-setup/report-page.md)
+* [Analytics Dashboard](administration-and-setup/analytics-dashboard.md)
 
 ## Infor Integration and Configuration
 
