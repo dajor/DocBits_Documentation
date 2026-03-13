@@ -1,5 +1,37 @@
 # Release Notes
 
+## **Release R0.0 HF1 16th March 2026**
+
+### DocBits Enhancements:
+
+*   **Document History in SFTP Export:**\
+    DocBits now supports including the full document history as part of the exported XML payload when exporting to SFTP. This feature is configurable via the Export Settings and provides downstream systems with a complete audit trail of every status change and action taken on a document within DocBits — including who made the change, when it occurred, and what the previous and current statuses were. This is particularly valuable for compliance, traceability, and operational analysis.
+
+*   **Charges Update on Order Confirmation for Infor On Premise:**\
+    Infor On Premise customers can now process Order Confirmations that include charges directly within DocBits. The charges are fully updated through the export, making the end-to-end Order Confirmation process seamless and removing the need for manual adjustments downstream.
+
+*   **Apply Default Layout to All Origins:**\
+    A new **Apply Default Layout to Origins** button has been introduced in the layout configuration screen. Administrators can now push the Default layout to all origins within an organization in a single action, eliminating the time-consuming manual process of copying and pasting layout JSON across each origin individually. This is especially useful during new customer onboarding where multiple origins need to be configured consistently.
+
+* **Document Type Selection for FTP Import:**\
+  FTP import configurations now support per-folder document type assignment. When configuring an FTP import, users can specify which document type — such as Invoice or Order Confirmation — should be applied to all documents imported from that folder. Documents are automatically classified upon import, removing the need for manual document type assignment after ingestion. This supports organizations that manage multiple document types across different sub-organizations and folders.
+* **Export to GLS840 for Infor On Premise**:\
+  DocBits now supports exporting documents to the GLS840 program for Infor On Premise customers, expanding the range of supported export targets for on-premise environments.
+* **UI Enhancements for Watchdog and Export Configuration:**\
+  The Watchdog configuration and Export configuration screens have been refreshed with an improved user interface, offering a cleaner layout and a more intuitive experience for administrators managing these settings.
+
+
+### Bug Fixes:
+
+* Fixed an issue where users with valid viewing rights were unable to view documents — permission logic has been refactored with an access-level check replacing the previous group-based filtering approach.
+* Improved exception handling across multiple areas of the application for greater stability.
+* Resolved an issue where boolean type columns were not handled correctly during field extraction.
+* Fixed an async authentication issue in the file upload endpoint.
+* Resolved UI display issues for the PO table on the validation screen.
+* Updated the script template to include change-tracking comments for better auditability.
+* Fixed an issue with dropdown fields not behaving correctly on the validation screen.
+* Fixed an issue where the sub-organisation field was not pre-filled when updating document assignments from the dashboard.
+
 ## **Release Winter Summit 10th December 2025**
 
 ### DocBits Enhancements:
