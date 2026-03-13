@@ -1,6 +1,6 @@
 # Release Notes
 
-## **Release R0.0 HF1 16th March 2026**
+## **Release HotFix 1 16th March 2026**
 
 ### DocBits Enhancements:
 
