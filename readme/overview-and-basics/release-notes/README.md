@@ -4,22 +4,28 @@
 
 ### DocBits Enhancements:
 
-*   **Document History in SFTP Export:**\
-    DocBits now supports including the full document history as part of the exported XML payload when exporting to SFTP. This feature is configurable via the Export Settings and provides downstream systems with a complete audit trail of every status change and action taken on a document within DocBits — including who made the change, when it occurred, and what the previous and current statuses were. This is particularly valuable for compliance, traceability, and operational analysis.
-
-*   **Charges Update on Order Confirmation for Infor On Premise:**\
-    Infor On Premise customers can now process Order Confirmations that include charges directly within DocBits. The charges are fully updated through the export, making the end-to-end Order Confirmation process seamless and removing the need for manual adjustments downstream.
-
+* **Document History in SFTP Export:**\
+  DocBits now supports including the full document history as part of the exported XML payload when exporting to SFTP. This feature is configurable via the Export Settings and provides downstream systems with a complete audit trail of every status change and action taken on a document within DocBits — including who made the change, when it occurred, and what the previous and current statuses were. This is particularly valuable for compliance, traceability, and operational analysis.
+* **Charges Update on Order Confirmation for Infor On Premise:**\
+  Infor On Premise customers can now process Order Confirmations that include charges directly within DocBits. The charges are fully updated through the export, making the end-to-end Order Confirmation process seamless and removing the need for manual adjustments downstream.
 *   **Apply Default Layout to All Origins:**\
     A new **Apply Default Layout to Origins** button has been introduced in the layout configuration screen. Administrators can now push the Default layout to all origins within an organization in a single action, eliminating the time-consuming manual process of copying and pasting layout JSON across each origin individually. This is especially useful during new customer onboarding where multiple origins need to be configured consistently.
 
-* **Document Type Selection for FTP Import:**\
-  FTP import configurations now support per-folder document type assignment. When configuring an FTP import, users can specify which document type — such as Invoice or Order Confirmation — should be applied to all documents imported from that folder. Documents are automatically classified upon import, removing the need for manual document type assignment after ingestion. This supports organizations that manage multiple document types across different sub-organizations and folders.
+    <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+*   **Document Type Selection for FTP Import:**\
+    FTP import configurations now support per-folder document type assignment. When configuring an FTP import, users can specify which document type — such as Invoice or Order Confirmation — should be applied to all documents imported from that folder. Documents are automatically classified upon import, removing the need for manual document type assignment after ingestion. This supports organizations that manage multiple document types across different sub-organizations and folders.
+
+    <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 * **Export to GLS840 for Infor On Premise**:\
   DocBits now supports exporting documents to the GLS840 program for Infor On Premise customers, expanding the range of supported export targets for on-premise environments.
-* **UI Enhancements for Watchdog and Export Configuration:**\
-  The Watchdog configuration and Export configuration screens have been refreshed with an improved user interface, offering a cleaner layout and a more intuitive experience for administrators managing these settings.
+*   **UI Enhancements for Watchdog and Export Configuration:**\
+    The Watchdog configuration and Export configuration screens have been refreshed with an improved user interface, offering a cleaner layout and a more intuitive experience for administrators managing these settings.
 
+    <figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+
+
+    <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Bug Fixes:
 
@@ -51,7 +57,7 @@
 * **Dynamic Column Rendering in Approval Screens:**\
   Enhanced approval views to dynamically display only the columns configured for comparison in each organization’s database preferences. Previously, some of the organization specific columns would appear empty when not configured for comparison, causing confusion. Now, approval views only show fields that are actively being compared. This provides clearer, organization-specific approval screens without empty or irrelevant columns.
 * **Order Type Field Added to Master Data Lookup**:\
-  Purchase order header list now includes an "Order Type"  column in master data lookup, providing additional categorization capabilities.
+  Purchase order header list now includes an "Order Type" column in master data lookup, providing additional categorization capabilities.
 * **Custom Filter Dashboard Improvements:**\
   The dashboard sharing functionality has been enhanced to provide greater flexibility for shared users. Individuals who have dashboards shared with them can now adjust and edit the dashboard filters, enabling them to tailor the displayed information to their specific needs. This improvement supports a more personalized and interactive viewing experience, ensuring that users can easily refine the data insights most relevant to their tasks.
 * **Customizable Prefixes for Approval Screen Columns:**\

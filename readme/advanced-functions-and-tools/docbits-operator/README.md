@@ -72,7 +72,7 @@ Clicking the **Save Prompt** button opens a popup where you can save the current
 When a prompt is running, users have several control options to manage or intervene in the execution process:
 
 * **Pause Prompt:** Temporarily halts the current execution. Useful if you want to observe the current state or prepare the system for the next steps.&#x20;
-* **Resume Prompt:** Continues execution from the point where it was paused. ![](<../../.gitbook/assets/image (3).png>)
+* **Resume Prompt:** Continues execution from the point where it was paused. ![](<../../.gitbook/assets/image (3) (1).png>)
 * **Cancel Prompt:** Stops the execution entirely and resets the session. This is helpful if the prompt needs to be aborted or restarted due to incorrect behavior or changes in input.&#x20;
 * **Take Control:** Allows the user to manually intervene by interacting directly with the system. This is useful if the operator gets stuck or misinterprets a step. Taking control **automatically pauses** the prompt and switches to manual mode until you choose to resume or cancel.
 
