@@ -19,11 +19,11 @@
 
 ### 1. Where exactly is the production environment hosted?
 
-**Response:** Hosted on AWS cloud infrastructure in Frankfurt, Germany. Uses S3 for storage and OpenSearch for log indexing. DocBits is ISO 27001 certified. All connections secured via SSH, HTTPS, and industry-standard encryption protocols.
+**Response:** Hosted on DigitalOcean cloud infrastructure in Frankfurt, Germany. Uses DigitalOcean Spaces for storage and OpenSearch for log indexing. DocBits is ISO 27001 certified. All connections secured via SSH, HTTPS, and industry-standard encryption protocols.
 
 **Status:** ✅ Confirmed
 
-**Notes:** AWS Frankfurt confirmed (S3 + OpenSearch). Ask for specific AWS region code (eu-central-1) and whether single or multi-AZ.
+**Notes:** DigitalOcean Frankfurt confirmed (Spaces + OpenSearch).
 
 ---
 
@@ -161,11 +161,11 @@ EU customer data is hosted exclusively in Frankfurt. No UK-only option currently
 
 ### 14. How long are access logs retained?
 
-**Response:** Logs are stored on AWS S3 in Frankfurt and OpenSearch. Customer-accessible logs retained for 30 days. Internal logs retained for 3 months.
+**Response:** Logs are stored on DigitalOcean Spaces in Frankfurt and OpenSearch. Customer-accessible logs retained for 30 days. Internal logs retained for 3 months.
 
 **Status:** ✅ Confirmed
 
-**Notes:** S3 + OpenSearch in Frankfurt. 30-day customer access / 3-month internal retention. Confirm if logs are immutable/tamper-proof.
+**Notes:** DigitalOcean Spaces + OpenSearch in Frankfurt. 30-day customer access / 3-month internal retention. Confirm if logs are immutable/tamper-proof.
 
 ---
 
@@ -175,7 +175,7 @@ EU customer data is hosted exclusively in Frankfurt. No UK-only option currently
 
 **Status:** ✅ Confirmed
 
-**Notes:** Customer-configurable retention (30 days / 3 months). Confirm: Does deletion include all copies (S3, OpenSearch, AI training data)?
+**Notes:** Customer-configurable retention (30 days / 3 months). Confirm: Does deletion include all copies (DigitalOcean Spaces, OpenSearch, AI training data)?
 
 ---
 
