@@ -291,9 +291,13 @@
 
 ## Funciones y herramientas avanzadas <a href="#advanced-functions-and-tools" id="advanced-functions-and-tools"></a>
 
+* [DocNet](advanced-functions-and-tools/docnet/README.md)
 * [Operador de DocBits](advanced-functions-and-tools/docbits-operator/README.md)
+* [DocNet](advanced-functions-and-tools/docnet/README.md)
   * [Guía de Escritura de Prompts](advanced-functions-and-tools/docbits-operator/prompt-writing-guide.md)
+* [DocNet](advanced-functions-and-tools/docnet/README.md)
   * [Activación de Prompts con un Flujo de Trabajo](advanced-functions-and-tools/docbits-operator/triggering-prompts-with-a-workflow/README.md)
+* [DocNet](advanced-functions-and-tools/docnet/README.md)
     * [Flujo de Ejecución en las Instalaciones](advanced-functions-and-tools/docbits-operator/triggering-prompts-with-a-workflow/on-premise-execution-flow.md)
 * [Postman for DocBits](advanced-functions-and-tools/postman-for-docbits/README.md)
   * [Prueba tu conexión BOD con Postman](advanced-functions-and-tools/postman-for-docbits/test-your-bod-connection-with-postman.md)
