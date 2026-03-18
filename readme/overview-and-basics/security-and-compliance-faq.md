@@ -139,7 +139,7 @@ EU customer data is hosted exclusively in Frankfurt. No UK-only option currently
 
 ## 🔹 Data Access & Logging
 
-### 12. Who (vendor support/engineers) can access raw documents and Infor LN data?
+### 12. Who (vendor support/engineers) can access raw documents and Infor ERP / SAP data?
 
 **Response:** FELLOWPRO AG has a designated Data Protection Officer (Daniel Jordan). DPAs with subprocessors are in place per GDPR. ISO 27001 mandates access controls.
 
@@ -209,9 +209,9 @@ EU customer data is hosted exclusively in Frankfurt. No UK-only option currently
 
 ---
 
-## 🔹 Integration Scope (Infor LN)
+## 🔹 Integration Scope (Infor ERP / SAP)
 
-### 19. What is the exact list of data fields pulled from LN masters for validation?
+### 19. What is the exact list of data fields pulled from ERP masters for validation?
 
 **Response:** Master data imported via Infor BODs:
 - **Suppliers:** Sync.SupplierPartyMaster, Sync.RemitToPartyMaster
@@ -222,17 +222,17 @@ EU customer data is hosted exclusively in Frankfurt. No UK-only option currently
 
 **Status:** ✅ Confirmed
 
-**Notes:** Ask DocBits for complete BOD list and field-level mapping documentation for your specific LN configuration.
+**Notes:** Ask DocBits for complete BOD list and field-level mapping documentation for your specific ERP configuration.
 
 ---
 
-### 20. What specific header fields are exported back to LN?
+### 20. What specific header fields are exported back to the ERP?
 
 **Response:** Header export fields include: SupplierCode, PurchaseType, InvoiceType, InvoiceNumberSupplier, InvoiceDate, InvoiceAmount, InvoiceCurrency, RateDeterminer, RateDate, TaxCountry, TransactionEntryDate, Reference, IDMReference, TaxBaseAmount, InvoiceDocumentType, and more.
 
 **Status:** ✅ Confirmed
 
-**Notes:** Review field mapping file for your specific environment. Confirm all static fields match your LN company setup.
+**Notes:** Review field mapping file for your specific environment. Confirm all static fields match your ERP company setup.
 
 ---
 
@@ -242,7 +242,7 @@ EU customer data is hosted exclusively in Frankfurt. No UK-only option currently
 
 **Status:** ✅ Partial
 
-**Notes:** Confirm: Does DocBits write ONLY to AP invoice and PO receipt objects? Any other LN modules touched? What about IDM write scope?
+**Notes:** Confirm: Does DocBits write ONLY to AP invoice and PO receipt objects? Any other ERP modules touched? What about IDM write scope?
 
 ---
 
@@ -256,7 +256,7 @@ EU customer data is hosted exclusively in Frankfurt. No UK-only option currently
 
 ---
 
-### 23. What authentication/authorization is used for LN connectivity?
+### 23. What authentication/authorization is used for ERP connectivity?
 
 **Response:** Uses ION API Files (OAuth2 client credentials) with ION API Client IDs and service accounts created in InforOS.
 
@@ -266,7 +266,7 @@ EU customer data is hosted exclusively in Frankfurt. No UK-only option currently
 
 ---
 
-### 24. Is data transfer between DocBits and LN encrypted end-to-end?
+### 24. Is data transfer between DocBits and the ERP encrypted end-to-end?
 
 **Response:** All connections between components secured using industry-standard encryption (SSH, HTTPS).
 
@@ -282,4 +282,4 @@ EU customer data is hosted exclusively in Frankfurt. No UK-only option currently
 
 **Status:** ✅ Confirmed
 
-**Notes:** Clarify which document types write back to LN vs. are only stored in IDM.
+**Notes:** Clarify which document types write back to the ERP vs. are only stored in IDM.
