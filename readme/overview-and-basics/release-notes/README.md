@@ -1,5 +1,154 @@
 # Notas de versão
 
+## **Lançamento Spring Spark 13 de maio de 2026**
+
+Disponibilidade no Sandbox: 27–29 de abril de 2026
+
+### Melhorias do DocBits:
+
+*   **Advanced Workflow Designer:**\
+    O DocBits apresenta um Advanced Workflow Designer completamente novo — um construtor de automação visual baseado em nós que coloca a orquestração completa de fluxos de trabalho ao alcance das suas mãos. Usando uma tela intuitiva de arrastar e soltar, os administradores podem conectar cartões de fluxo de trabalho do DocBits em pipelines de processamento complexos e de múltiplas etapas. Cada nó na tela representa uma ação ou ponto de decisão, e as conexões entre os nós definem o fluxo dos documentos através do pipeline. O designer suporta etapas de espera para introduzir atrasos temporizados, caminhos paralelos onde todos ou alguns ramos devem ser concluídos antes de continuar, e a capacidade de encadear qualquer combinação de cartões integrados ou criados por parceiros. Os fluxos de trabalho podem ser salvos como modelos reutilizáveis, importados e exportados entre ambientes, e testados diretamente a partir do designer antes de entrar em produção. O editor possui uma tela com snap-to-grid e navegação por mini-mapa para fluxos de trabalho grandes, atalhos de teclado para copiar e colar, validação em tempo real com destaque de erros durante a construção, e proteção contra edição concorrente para evitar a sobrescrita de alterações por outros utilizadores. Registos de execução detalhados fornecem monitorização por nó, permitindo aos administradores rastrear exatamente como cada etapa de um fluxo de trabalho foi executada e onde ocorreram problemas.
+
+    ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/release_may_2026_advanced_workflow_designer.png)
+
+*   **Melhorias do Workflow Designer:**\
+    O designer de fluxos de trabalho existente foi melhorado com lógica de ramificação if/else, permitindo fluxos de trabalho baseados em decisões mais sofisticados. Vários novos cartões de condição foram adicionados, expandindo ainda mais a gama de lógica de automação disponível. Um novo Workflow Test Manager permite que os administradores criem e executem testes automatizados para fluxos de trabalho individualmente ou todos de uma vez, garantindo que as alterações se comportem como esperado antes da implantação. A secção de Workflow agora também inclui um painel de KPIs com métricas chave sobre o desempenho de execução dos fluxos de trabalho.
+
+    ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/release_may_2026_workflow_branching.png)
+
+*   **DocNet AI Agents:**\
+    O DocBits agora inclui DocNet AI Agents — agentes inteligentes e autónomos que funcionam em segundo plano para lidar com tarefas de processamento de documentos como a correspondência de ordens de compra e a validação de faturas. Os agentes operam de forma independente, trabalhando nas tarefas atribuídas e escalando para os utilizadores apenas quando é necessário julgamento humano. Quando um agente encontra uma exceção ou requer confirmação, cria um pedido de aprovação que aparece diretamente na caixa de entrada do utilizador, garantindo que nada é perdido sem necessitar de supervisão constante. Os agentes podem coordenar-se entre si, delegar sub-tarefas e organizar o trabalho em missões e projetos para processos complexos de múltiplas etapas. Um painel dedicado de agentes fornece visibilidade completa sobre a atividade dos agentes, métricas de desempenho e registos de auditoria, para que os administradores possam monitorizar o que os agentes estão a fazer e quão eficientemente trabalham. Notificações em tempo real mantêm os utilizadores informados quando os agentes concluem tarefas ou sinalizam itens para revisão.
+
+    ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/release_may_2026_docnet_ai_agents.png)
+
+*   **Partner Card SDK:**\
+    Um novo Partner Card SDK permite que desenvolvedores de terceiros e parceiros criem cartões de fluxo de trabalho personalizados para o DocBits. Os parceiros podem carregar pacotes de cartões para validação e revisão, importar cartões de repositórios GitHub e gerir submissões através de uma página dedicada de configurações do Card SDK. Um sistema de revisão alimentado por IA avalia automaticamente os cartões submetidos quanto à qualidade e conformidade. O SDK inclui downloads baseados em exemplos com diálogos de seleção de cartões, validação comportamental num ambiente sandbox e documentação abrangente para começar. O Card SDK é protegido por verificações de licença e agora é visível para todos os utilizadores, não apenas administradores.
+
+*   **Full-Text Search / DocSearch:**\
+    Uma nova capacidade de pesquisa de texto completo foi adicionada ao DocBits, alimentada por pesquisa vetorial baseada em IA. Os utilizadores podem pesquisar em todos os documentos indexados com filtragem de fornecedores em tempo real e uma funcionalidade "Find Similar" para localizar documentos semelhantes a um selecionado. Uma página de configurações dedicada permite que os administradores configurem a indexação de dados de IA, preferências de armazenamento vetorial e monitorizem o progresso da indexação em tempo real. O acesso ao DocSearch é gerido através de planos de subscrição.
+
+*   **Expansão de formatos E-Invoice:**\
+    O DocBits expandiu significativamente o seu suporte de formatos de fatura eletrónica com mais de 80 novos tipos globais de e-invoice e mais de 40 novos formatos. Os formatos recentemente suportados incluem Taiwan EGUI, Thailand E-Tax, India GST Credit Note, SPS Commerce RSX 7.7.4, XRechnung 3.0.2, ZUGFeRD 2.2 e 2.3.2, variantes Factur-X, Uruguay CFE, Ecuador SRI Retención, SVEFAKTURA 1.0, EHF 3.0, OIOUBL, Finvoice e Asia-Pacific PINT Credit Notes, entre outros. O DocBits agora atinge 100% de cobertura de classificação e extração para todos os formatos de documentos eletrónicos suportados.
+
+*   **Login Analytics:**\
+    Um novo painel de Login Analytics dá aos administradores visibilidade completa sobre a atividade de login em toda a organização. O painel inclui gráficos comparativos que mostram tendências de login ao longo do tempo, vistas de agregação diária e semanal, e geolocalização baseada em GeoLite2 para ver de onde vêm os logins. Isto fornece uma forma rápida de detetar padrões de login incomuns e monitorizar a segurança das contas.
+
+    ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/release_may_2026_login_analytics.png)
+
+*   **Analytics Dashboard:**\
+    Um módulo abrangente de análise de processamento de documentos foi introduzido com múltiplas vistas de painel incluindo Executive Overview, API Metrics, Quality Metrics e Processing Performance. Document Flow Analytics oferece métricas ao nível da organização sobre tempos de processamento de documentos e transições de estado. Um sistema completo de Activity Log e Event Log permite que os administradores naveguem, pesquisem, filtrem e exportem dados de eventos com visualizações de gráficos e destaque de sintaxe JSON. Uma funcionalidade de Audit Trail fornece rastreamento detalhado do histórico de alterações com detalhes em popup para cada modificação.
+
+    ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/release_may_2026_analytics_dashboard.png)
+
+*   **Melhorias no Controlo de Acesso:**\
+    O controlo de acesso foi aplicado em toda a aplicação, cobrindo a tela de validação de campos, tabelas extraídas por IA e múltiplas outras vistas. Os administradores agora têm a opção de desativar o controlo de acesso globalmente quando necessário. O design do controlo de acesso foi renovado para uma experiência mais consistente e intuitiva em todas as telas.
+
+*   **Melhorias do Layout Builder:**\
+    O Layout Builder agora suporta campos ocultos e de apenas leitura com indicadores visuais, facilitando aos administradores compreender quais campos são visíveis e editáveis para os utilizadores. Um divisor redimensionável entre painéis melhora a flexibilidade do espaço de trabalho, e as configurações de comprimento de campo fornecem controlo mais preciso sobre campos de entrada de dados.
+
+*   **Histórico de Exportação nas Ações do Dashboard:**\
+    Os utilizadores podem agora aceder ao histórico de exportação de um documento diretamente a partir do menu de ações do painel, tornando mais rápido rever tentativas de exportação anteriores sem sair da vista principal.
+
+*   **Melhorias na Exportação:**\
+    As configurações de exportação agora suportam ordenação de execução, permitindo aos administradores definir a sequência em que múltiplos métodos de exportação são processados. Um novo botão de re-exportação nas telas de erro permite que os utilizadores tentem novamente a partir da etapa que falhou em vez de reiniciar todo o processo. O DocBits também agora suporta o alvo de exportação API GLS840MI, com uma interface atualizada para gerir múltiplas configurações de exportação ativas por tipo de documento.
+
+    ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/release_may_2026_export_improvements.png)
+
+*   **Script Versioning & AI Chat:**\
+    Os scripts de documentos agora suportam histórico completo de versões, permitindo aos administradores rastrear alterações, comparar versões e restaurar versões anteriores de scripts. Os scripts predefinidos são protegidos contra edições acidentais, e os nomes dos scripts podem ser editados inline com navegação breadcrumb. Os campos agora podem ser definidos como apenas leitura programaticamente através da nova função set\_is\_readonly. Um novo assistente de chat alimentado por IA ajuda no desenvolvimento de scripts, fornecendo respostas em streaming em tempo real.
+
+    ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/release_may_2026_script_versioning.png)
+
+*   **API Key Management:**\
+    Uma nova página de API Key Management nas configurações de integração permite que os administradores criem, visualizem e giram múltiplas chaves API com cache baseado em Redis para desempenho.
+
+*   **Idea Board:**\
+    Uma nova funcionalidade Idea Board permite que os utilizadores submetam, discutam e votem em ideias de funcionalidades e sugestões. O quadro inclui um editor de texto rico com suporte para upload de imagens, comentários e funcionalidade de votação.
+
+*   **Estatísticas de Fornecedores:**\
+    Novas vistas de estatísticas de fornecedores fornecem informações sobre métricas de processamento de documentos relacionadas com fornecedores.
+
+*   **Expansão Linguística:**\
+    O DocBits agora suporta 22 idiomas, expandido a partir da seleção anterior. O seletor de idioma foi atualizado com um layout de grelha de 4 colunas, e os utilizadores agora podem definir o seu idioma preferido diretamente nas suas configurações de utilizador.
+
+*   **Redesign do Plano de Subscrição:**\
+    O seletor de plano de subscrição foi redesenhado com uma exibição melhorada de informações de tokens e uma nova linha de utilização DocNet na tabela de subscrição.
+
+*   **Dual Monitor Mode:**\
+    O Dual Monitor Mode foi movido para uma configuração global de utilizador, tornando-o acessível e persistente entre sessões para utilizadores que trabalham com múltiplos ecrãs.
+
+*   **Pesquisa Difusa para Caracteres Alemães:**\
+    A funcionalidade de pesquisa agora suporta corretamente caracteres especiais alemães (tremas), garantindo que pesquisas por palavras como "Rechnungsnummer" também correspondam a representações alternativas de caracteres.
+
+*   **Melhorias nas Notificações por Email:**\
+    A substituição de parâmetros em modelos de email foi melhorada com melhor validação de destinatários e tratamento de preferências de utilizador.
+
+*   **Rastreamento de Utilização de Créditos:**\
+    As organizações podem agora visualizar e rastrear a sua utilização de créditos de IA ao longo do tempo com opções de filtragem, proporcionando melhor visibilidade sobre padrões de consumo.
+
+### Melhorias Gerais:
+
+*   A área de Settings foi redesenhada com uma barra lateral recolhível, subcategorias organizadas e navegação baseada em âncoras para acesso mais rápido. Um painel de ajuda contextual fornece orientação inline, e crachás de rastreamento de estado mostram a completude da configuração de relance.
+
+    ![](https://raw.githubusercontent.com/Fellow-Consulting-AG/docbits/refs/heads/main/readme/.gitbook/assets/release_may_2026_settings_redesign.png)
+
+* Documentos com códigos de barras agora dividem-se de forma mais fiável, com melhor tratamento de casos extremos e recuperação de erros.
+* A correspondência de PO agora deteta e converte automaticamente preços unitários ao dividir linhas correspondidas, reduzindo correções manuais.
+* Os documentos já não ficam presos durante a extração — um novo sistema de rastreamento de estado garante que cada documento progride através do pipeline.
+* Quando ocorrem erros de extração, o DocBits agora fornece mensagens de erro mais claras com detalhes passo a passo para ajudar a resolver o problema mais rapidamente.
+* O desempenho geral da aplicação foi melhorado com tempos de resposta mais rápidos em todas as telas.
+* As regras de Auto Accounting agora suportam filtragem baseada em números para condições de correspondência mais precisas.
+
+### Correções de Bugs:
+
+* Corrigido um problema em que o nome personalizado do painel não estava alinhado com o ícone do painel.
+* Corrigido um problema em que o painel exibia colunas que não estavam incluídas na configuração de colunas visíveis.
+* Corrigido um problema em que o nome do separador selecionado não era exibido no painel.
+* Corrigido um problema em que o popup "Nova versão disponível" aparecia em cada mudança de sub-organização.
+* Corrigido um problema em que a configuração de documentos por página não era preservada após atualização da página.
+* Corrigido um problema em que a contagem de documentos do painel não atualizava corretamente.
+* Corrigido um problema em que os utilizadores recebiam incorretamente a mensagem de erro "O painel já existe".
+* Corrigido um problema em que o popup de confirmação de eliminação em massa não era exibido.
+* Corrigidos múltiplos problemas com a exibição e o comportamento de gravação de painéis partilhados.
+* Corrigido um problema em que as tabelas de documentos não eram exibidas na tela de validação.
+* Corrigido um problema em que uma mensagem de erro incorreta era mostrada para ficheiros PDF inválidos.
+* Corrigido um problema em que o redimensionador de colunas aparecia atrás dos botões de ação da linha.
+* Corrigido um problema em que valores incorretos eram extraídos para montante líquido, montante de imposto e taxa de imposto.
+* Corrigido um problema em que as configurações de exportação não podiam ser criadas sem especificar um tipo de documento quando marcado como opcional.
+* Corrigido um problema em que um erro de configuração duplicada ocorria ao adicionar novas configurações de exportação.
+* Corrigido um problema em que erros ocorriam ao criar múltiplas configurações de exportação.
+* Corrigido um problema em que o título da configuração era apagado após selecionar Watchdog como tipo de exportação.
+* Corrigido um erro interno do servidor ao criar configurações de exportação Infor.
+* Corrigido um problema que impedia o reinício múltiplo de documentos exportados.
+* Corrigido um problema em que algumas páginas de configurações não podiam ser encontradas.
+* Corrigido um problema em que o link de download do Watchdog retornava um erro.
+* Corrigido um problema em que o botão de criação de List of Values não acionava nenhuma ação.
+* Corrigido um problema em que as descrições de grupos não eram exibidas.
+* Corrigido um problema em que o estado de validação de palavra-passe persistia após cancelar a edição de um utilizador.
+* Corrigido um problema em que documentos no estado "Pending Watcher Export" não eram clicáveis.
+* Corrigido um problema em que configurações de pesquisa duplicadas podiam ser criadas.
+* Corrigido um problema em que a ordenação de utilizadores não funcionava corretamente.
+* Corrigido um problema de exibição em que todo o texto da aplicação aparecia em azul.
+* Corrigido um problema em que a exibição do formato de idioma era inconsistente.
+* Corrigido um problema em que a configuração de idioma aparecia vazia quando nenhuma preferência era selecionada.
+* Corrigido um problema em que o uso de maiúsculas/minúsculas do nome da empresa era ignorado.
+* Corrigido um problema em que a pesquisa não funcionava para grupos e permissões.
+* Corrigido um problema em que a ação de eliminar utilizador não eliminava corretamente o utilizador.
+* Corrigido um problema em que os ícones de fluxo de documentos não eram visíveis.
+* Corrigido um erro interno do servidor ao guardar modelos de email.
+* Corrigido um problema em que variáveis duplicadas eram inseridas nos assuntos dos modelos de email.
+* Corrigido um erro ao guardar os detalhes da conta de email de entrada.
+* Corrigido um problema em que os documentos ficavam presos no estado "novo" após o carregamento.
+* Corrigido um problema em que as colunas de tabela não estavam disponíveis após desativação e reativação.
+* Corrigido um problema em que a criação de árvores de decisão falhava para tipos de documentos personalizados.
+* Corrigido um problema em que a extração de tabelas não retornava resultados.
+* Corrigido um problema em que o tipo de documento CREDIT\_NOTE não era reconhecido corretamente.
+* Corrigido um problema em que utilizadores sem direitos de administrador podiam ver todas as tarefas criadas.
+* Corrigido um problema em que o popup de sub-organização não fechava após o carregamento de ficheiros por arrastar e soltar.
+* Corrigido um problema em que os filtros de período de tempo não eram aplicados corretamente.
+* Corrigido um problema com a conversão de data e hora para o formato dos EUA.
+* Corrigido um problema em que os fluxos de trabalho eram acionados na ordem errada — a execução de fluxos de trabalho agora usa bloqueio de documentos e prioridades de fila adequados.
+
 ## **Lançamento Winter Summit 10 de dezembro de 2025**
 
 ### Melhorias do DocBits:
