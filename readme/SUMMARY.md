@@ -209,6 +209,7 @@
     * [Configuration de l'exportation pour le portail des fournisseurs pour M3](administration-and-setup/settings/supplier-setting/export-configuration-for-supplier-portal.md)
   * [Gestion du Cache](administration-and-setup/settings/cache-management.md)
 * [Workflow](administration-and-setup/workflow/README.md)
+  * [Tableau de Bord des Workflows](administration-and-setup/workflow/workflow-dashboard.md)
   * [Quand](administration-and-setup/workflow/when/README.md)
     * [Description de la carte](administration-and-setup/workflow/when/card-description.md)
     * [Opération de Type de Document](administration-and-setup/workflow/when/page.md)
