@@ -292,6 +292,11 @@
 ## Funciones y herramientas avanzadas <a href="#advanced-functions-and-tools" id="advanced-functions-and-tools"></a>
 
 * [DocNet](advanced-functions-and-tools/docnet/README.md)
+* [DocFlow MCP](advanced-functions-and-tools/docflow-mcp/README.md)
+  * [Configuración](advanced-functions-and-tools/docflow-mcp/setup-and-configuration.md)
+  * [Herramientas de Flujo de Trabajo](advanced-functions-and-tools/docflow-mcp/workflow-tools.md)
+  * [Herramientas del SDK de Tarjetas](advanced-functions-and-tools/docflow-mcp/card-sdk-tools.md)
+  * [Ejemplos](advanced-functions-and-tools/docflow-mcp/examples.md)
 * [Operador de DocBits](advanced-functions-and-tools/docbits-operator/README.md)
   * [Guía de Escritura de Prompts](advanced-functions-and-tools/docbits-operator/prompt-writing-guide.md)
   * [Activación de Prompts con un Flujo de Trabajo](advanced-functions-and-tools/docbits-operator/triggering-prompts-with-a-workflow/README.md)
