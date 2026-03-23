@@ -306,6 +306,7 @@
   * [API-Licenties](administration-and-setup/settings/api-licenses.md)
   * [Cachebeheer](administration-and-setup/settings/cache-management.md)
 * [Workflow](administration-and-setup/workflow/README.md)
+  * [Workflow Dashboard](administration-and-setup/workflow/workflow-dashboard.md)
   * [Wanneer](administration-and-setup/workflow/when/README.md)
     * [Kaart beschrijving](administration-and-setup/workflow/when/card-description.md)
     * [Document Type Operation](administration-and-setup/workflow/when/page.md)
