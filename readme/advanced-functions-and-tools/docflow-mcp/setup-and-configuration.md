@@ -1,32 +1,32 @@
-# Installation et configuration
+# Installatie & Configuratie
 
-## Points de terminaison API
+## API-eindpunten
 
-| Environnement | Point de terminaison MCP |
-|----------------|--------------------------|
-| Développement | `https://dev.api.docbits.com/api/mcp/` |
+| Omgeving | MCP-eindpunt |
+|----------|-------------|
+| Ontwikkeling | `https://dev.api.docbits.com/api/mcp/` |
 | Stage | `https://stage.api.docbits.com/api/mcp/` |
-| Production | `https://api.docbits.com/api/mcp/` |
+| Productie | `https://api.docbits.com/api/mcp/` |
 
-## Authentification
+## Authenticatie
 
-Toutes les requêtes MCP nécessitent une clé API DocBits valide transmise en tant que jeton Bearer. Vous pouvez trouver votre clé API dans **Paramètres > Intégration** dans l'interface DocBits.
+Alle MCP-verzoeken vereisen een geldige DocBits API-sleutel die als Bearer-token wordt meegegeven. U vindt uw API-sleutel in **Instellingen > Integratie** in de DocBits-gebruikersinterface.
 
-Le jeton est envoyé via l'en-tête `Authorization` :
+Het token wordt verzonden via de `Authorization`-header:
 
 ```
 Authorization: Bearer <your-api-key>
 ```
 
 {% hint style="warning" %}
-Les outils réservés aux administrateurs (`sdk_approve_card`, `sdk_reject_card`, `sdk_delete_submission`) nécessitent un jeton d'administrateur d'organisation.
+Tools die alleen voor admins beschikbaar zijn (`sdk_approve_card`, `sdk_reject_card`, `sdk_delete_submission`) vereisen een organisatiebeheerder-token.
 {% endhint %}
 
-## Configuration du client
+## Clientconfiguratie
 
 ### Claude Code
 
-Ajoutez le serveur MCP DocFlow en utilisant la CLI :
+Voeg de DocFlow MCP-server toe via de CLI:
 
 ```bash
 claude mcp add docflow-dev \
@@ -35,7 +35,7 @@ claude mcp add docflow-dev \
   -- https://dev.api.docbits.com/api/mcp/
 ```
 
-Ou ajoutez-le à votre fichier de configuration `.claude.json` :
+Of voeg het toe aan uw `.claude.json`-configuratiebestand:
 
 ```json
 {
@@ -51,7 +51,7 @@ Ou ajoutez-le à votre fichier de configuration `.claude.json` :
 }
 ```
 
-Vous pouvez également l'ajouter à un fichier `.mcp.json` au niveau du projet :
+U kunt het ook toevoegen aan een `.mcp.json`-bestand op projectniveau:
 
 ```json
 {
@@ -69,7 +69,7 @@ Vous pouvez également l'ajouter à un fichier `.mcp.json` au niveau du projet :
 
 ### Claude Desktop
 
-Ajoutez ce qui suit à votre fichier `claude_desktop_config.json` :
+Voeg het volgende toe aan uw `claude_desktop_config.json`:
 
 ```json
 {
@@ -86,12 +86,12 @@ Ajoutez ce qui suit à votre fichier `claude_desktop_config.json` :
 ```
 
 {% hint style="info" %}
-Sur macOS, le fichier de configuration se trouve à `~/Library/Application Support/Claude/claude_desktop_config.json`. Sur Windows : `%APPDATA%\Claude\claude_desktop_config.json`.
+Op macOS bevindt het configuratiebestand zich op `~/Library/Application Support/Claude/claude_desktop_config.json`. Op Windows: `%APPDATA%\Claude\claude_desktop_config.json`.
 {% endhint %}
 
 ### OpenAI Codex
 
-Codex CLI prend en charge les serveurs MCP. Ajoutez à la configuration de votre projet :
+Codex CLI ondersteunt MCP-servers. Voeg toe aan uw projectconfiguratie:
 
 ```json
 {
@@ -107,9 +107,9 @@ Codex CLI prend en charge les serveurs MCP. Ajoutez à la configuration de votre
 }
 ```
 
-### Client MCP générique (Python)
+### Generieke MCP-client (Python)
 
-Pour les intégrations personnalisées utilisant le SDK Python MCP :
+Voor aangepaste integraties met de MCP Python SDK:
 
 ```python
 from mcp.client.streamable_http import streamablehttp_client
@@ -126,10 +126,10 @@ async def connect():
             print(f"Available tools: {[t.name for t in tools.tools]}")
 ```
 
-## Vérification de votre connexion
+## Verbinding verifiëren
 
-Après avoir configuré votre client, testez la connexion en appelant l'outil `list_workflows`. Il ne nécessite aucun paramètre et devrait retourner un tableau de workflows (ou un tableau vide pour les nouvelles organisations).
+Na het configureren van uw client kunt u de verbinding testen door de `list_workflows`-tool aan te roepen. Deze vereist geen parameters en zou een array van workflows moeten retourneren (of een lege array voor nieuwe organisaties).
 
 {% hint style="info" %}
-Si vous obtenez des erreurs d'authentification, vérifiez que votre clé API est correcte et que l'en-tête `Authorization` est bien envoyé. Certains clients MCP nécessitent un redémarrage après modification de la configuration.
+Als u authenticatiefouten krijgt, controleer dan of uw API-sleutel correct is en of de `Authorization`-header wordt meegestuurd. Sommige MCP-clients vereisen een herstart na het wijzigen van de configuratie.
 {% endhint %}

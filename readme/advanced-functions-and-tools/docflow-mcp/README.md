@@ -1,66 +1,66 @@
 # DocFlow MCP
 
-DocFlow expose un serveur **Model Context Protocol (MCP)** qui permet aux assistants IA de gérer les workflows et les cartes partenaires de manière programmatique. Tout client compatible MCP — Claude Code, Claude Desktop, OpenAI Codex ou des intégrations personnalisées — peut se connecter et utiliser ces outils.
+DocFlow biedt een **Model Context Protocol (MCP)**-server waarmee AI-assistenten workflows en partnerkaarten programmatisch kunnen beheren. Elke MCP-compatibele client — Claude Code, Claude Desktop, OpenAI Codex of aangepaste integraties — kan verbinding maken en deze tools gebruiken.
 
-## Que pouvez-vous faire ?
+## Wat kunt u doen?
 
-Avec DocFlow MCP, vous pouvez :
+Met DocFlow MCP kunt u:
 
-- **Lister, créer, mettre à jour et supprimer** des workflows avancés
-- **Tester des workflows** avec des documents réels ou simulés
-- **Créer des cartes personnalisées** à l'aide du SDK de cartes partenaires
-- **Valider, tester, approuver et gérer** les soumissions de cartes partenaires
-- **Importer des cartes** directement depuis des dépôts GitHub
+- **Geavanceerde workflows** weergeven, aanmaken, bijwerken en verwijderen
+- **Workflows testen** met echte of gesimuleerde documenten
+- **Aangepaste kaarten bouwen** met de Partner Card SDK
+- **Partnerkaartinzendingen** valideren, testen, goedkeuren en beheren
+- **Kaarten importeren** rechtstreeks vanuit GitHub-repositories
 
-## Aperçu des outils
+## Overzicht van tools
 
-DocFlow MCP fournit **18 outils** répartis en quatre catégories :
+DocFlow MCP biedt **18 tools** verdeeld over vier categorieën:
 
-### Gestion des workflows
+### Workflowbeheer
 
-| Outil | Description |
-|-------|-------------|
-| `list_workflows` | Lister tous les workflows de l'organisation actuelle |
-| `get_workflow` | Obtenir les détails d'un workflow spécifique par ID |
-| `create_advanced_workflow` | Créer un nouveau workflow avancé avec des nœuds et des arêtes |
-| `update_advanced_workflow` | Mettre à jour un workflow avancé existant |
-| `delete_workflow` | Supprimer un workflow par ID |
+| Tool | Beschrijving |
+|------|-------------|
+| `list_workflows` | Alle workflows van de huidige organisatie weergeven |
+| `get_workflow` | Details van een specifieke workflow ophalen op basis van ID |
+| `create_advanced_workflow` | Een nieuwe geavanceerde workflow aanmaken met nodes en edges |
+| `update_advanced_workflow` | Een bestaande geavanceerde workflow bijwerken |
+| `delete_workflow` | Een workflow verwijderen op basis van ID |
 
-### Test des workflows
+### Workflow testen
 
-| Outil | Description |
-|-------|-------------|
-| `test_advanced_workflow` | Tester l'exécution d'un workflow avancé avec un document optionnel |
-| `list_test_scenarios` | Lister tous les scénarios de test de workflow |
-| `list_cards` | Lister les cartes/actions de workflow disponibles |
+| Tool | Beschrijving |
+|------|-------------|
+| `test_advanced_workflow` | Een geavanceerde workflow-uitvoering testen met optioneel document |
+| `list_test_scenarios` | Alle testscenario's voor workflows weergeven |
+| `list_cards` | Beschikbare workflowkaarten/acties weergeven |
 
-### Gestion du SDK de cartes
+### Card SDK-beheer
 
-| Outil | Description |
-|-------|-------------|
-| `sdk_list_submissions` | Lister toutes les soumissions de cartes partenaires |
-| `sdk_get_submission_status` | Obtenir le statut de validation d'une soumission |
-| `sdk_approve_card` | Approuver une carte partenaire validée (admin) |
-| `sdk_reject_card` | Rejeter une soumission de carte partenaire (admin) |
-| `sdk_delete_submission` | Désactiver ou supprimer une soumission (admin) |
-| `sdk_list_cards_picker` | Lister toutes les cartes activées avec les indicateurs de rôle |
+| Tool | Beschrijving |
+|------|-------------|
+| `sdk_list_submissions` | Alle partnerkaartinzendingen weergeven |
+| `sdk_get_submission_status` | Validatiestatus van een inzending ophalen |
+| `sdk_approve_card` | Een gevalideerde partnerkaart goedkeuren (admin) |
+| `sdk_reject_card` | Een partnerkaartinzending afwijzen (admin) |
+| `sdk_delete_submission` | Een inzending deactiveren of verwijderen (admin) |
+| `sdk_list_cards_picker` | Alle ingeschakelde kaarten met rolvlaggen weergeven |
 
-### Développement avec le SDK de cartes
+### Card SDK-ontwikkeling
 
-| Outil | Description |
-|-------|-------------|
-| `sdk_create_card` | Créer une nouvelle carte partenaire à partir du code source |
-| `sdk_validate_card` | Exécuter une validation en 5 étapes sans enregistrer |
-| `sdk_test_card` | Exécuter une carte dans un environnement sandboxé |
-| `sdk_import_github` | Importer une application partenaire depuis GitHub |
+| Tool | Beschrijving |
+|------|-------------|
+| `sdk_create_card` | Een nieuwe partnerkaart aanmaken vanuit broncode |
+| `sdk_validate_card` | 5-fasen validatie uitvoeren zonder op te slaan |
+| `sdk_test_card` | Een kaart uitvoeren in een sandboxomgeving |
+| `sdk_import_github` | Een partnerapp importeren vanuit GitHub |
 
-## Pour commencer
+## Aan de slag
 
-1. [Configurez votre client MCP](setup-and-configuration.md)
-2. Découvrez les [Outils de workflow](workflow-tools.md)
-3. Explorez les [Outils du SDK de cartes](card-sdk-tools.md)
-4. Suivez les [Exemples](examples.md) de bout en bout
+1. [Stel uw MCP-client in](setup-and-configuration.md)
+2. Leer over [Workflow Tools](workflow-tools.md)
+3. Ontdek de [Card SDK Tools](card-sdk-tools.md)
+4. Volg de volledige [Voorbeelden](examples.md)
 
 {% hint style="info" %}
-DocFlow MCP utilise le transport **Streamable HTTP**. Le point de terminaison du serveur est `/api/mcp/` sur votre hôte API DocBits.
+DocFlow MCP gebruikt **Streamable HTTP**-transport. Het servereindpunt is `/api/mcp/` op uw DocBits API-host.
 {% endhint %}

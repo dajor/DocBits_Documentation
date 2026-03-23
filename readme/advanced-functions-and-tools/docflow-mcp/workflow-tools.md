@@ -1,14 +1,14 @@
-# Outils de workflow
+# Workflow Tools
 
-DocFlow MCP fournit 8 outils pour gérer et tester les workflows avancés.
+DocFlow MCP biedt 8 tools voor het beheren en testen van geavanceerde workflows.
 
 ## list\_workflows
 
-Lister tous les workflows de l'organisation actuelle.
+Alle workflows van de huidige organisatie weergeven.
 
-**Paramètres :** Aucun
+**Parameters:** Geen
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 [
@@ -27,15 +27,15 @@ Lister tous les workflows de l'organisation actuelle.
 
 ## get\_workflow
 
-Obtenir les détails d'un workflow spécifique, y compris sa structure de nœuds et d'arêtes.
+Details van een specifieke workflow ophalen, inclusief de node- en edge-structuur.
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `workflow_id` | string | Oui | UUID du workflow |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `workflow_id` | string | Ja | UUID van de workflow |
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 {
@@ -60,44 +60,44 @@ Obtenir les détails d'un workflow spécifique, y compris sa structure de nœuds
 
 ## create\_advanced\_workflow
 
-Créer un nouveau workflow avancé avec des nœuds et des arêtes.
+Een nieuwe geavanceerde workflow aanmaken met nodes en edges.
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `name` | string | Oui | Nom du workflow (3-126 caractères) |
-| `description` | string | Non | Description optionnelle |
-| `nodes` | array | Oui | Tableau de nœuds de workflow |
-| `edges` | array | Oui | Tableau d'arêtes reliant les nœuds |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `name` | string | Ja | Workflownaam (3-126 tekens) |
+| `description` | string | Nee | Optionele beschrijving |
+| `nodes` | array | Ja | Array van workflownodes |
+| `edges` | array | Ja | Array van edges die nodes verbinden |
 
-### Structure des nœuds
+### Node-structuur
 
-Chaque nœud nécessite :
+Elke node vereist:
 
-| Champ | Type | Description |
-|-------|------|-------------|
-| `node_id` | string | Identifiant unique du nœud |
-| `node_type` | string | `when`, `then`, `and`, `or` ou `delay` |
-| `position` | object | Position `{x: number, y: number}` sur le canevas |
-| `label` | string | Libellé d'affichage |
-| `card` | object | Configuration de la carte (voir ci-dessous) |
+| Veld | Type | Beschrijving |
+|------|------|-------------|
+| `node_id` | string | Unieke identificatie voor de node |
+| `node_type` | string | `when`, `then`, `and`, `or` of `delay` |
+| `position` | object | `{x: number, y: number}` positie op het canvas |
+| `label` | string | Weergavelabel |
+| `card` | object | Kaartconfiguratie (zie hieronder) |
 
-### Structure des arêtes
+### Edge-structuur
 
-Chaque arête nécessite :
+Elke edge vereist:
 
-| Champ | Type | Description |
-|-------|------|-------------|
-| `edge_id` | string | Identifiant unique de l'arête |
-| `source_node_id` | string | ID du nœud source |
-| `target_node_id` | string | ID du nœud cible |
-| `source_handle` | string | `success` ou `error` (optionnel) |
-| `target_handle` | string | `input` (optionnel) |
+| Veld | Type | Beschrijving |
+|------|------|-------------|
+| `edge_id` | string | Unieke identificatie voor de edge |
+| `source_node_id` | string | ID van de bronnode |
+| `target_node_id` | string | ID van de doelnode |
+| `source_handle` | string | `success` of `error` (optioneel) |
+| `target_handle` | string | `input` (optioneel) |
 
-### Configuration des cartes
+### Kaartconfiguratie
 
-Les cartes définissent ce qu'un nœud fait. Utilisez `list_cards` ou `sdk_list_cards_picker` pour obtenir les cartes disponibles.
+Kaarten definiëren wat een node doet. Gebruik `list_cards` of `sdk_list_cards_picker` om beschikbare kaarten op te halen.
 
 ```json
 {
@@ -111,10 +111,10 @@ Les cartes définissent ce qu'un nœud fait. Utilisez `list_cards` ou `sdk_list_
 ```
 
 {% hint style="info" %}
-Vous devez uniquement fournir `id`, `card_type`, `version` et `variables` pour chaque carte. Le serveur enrichit automatiquement les cartes avec les métadonnées d'affichage (svg, texte, catégorie) depuis la base de données.
+U hoeft alleen `id`, `card_type`, `version` en `variables` op te geven voor elke kaart. De server verrijkt kaarten automatisch met weergavemetadata (svg, tekst, categorie) uit de database.
 {% endhint %}
 
-**Exemple de requête :**
+**Voorbeeldverzoek:**
 
 ```json
 {
@@ -160,7 +160,7 @@ Vous devez uniquement fournir `id`, `card_type`, `version` et `variables` pour c
 }
 ```
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 {
@@ -172,19 +172,19 @@ Vous devez uniquement fournir `id`, `card_type`, `version` et `variables` pour c
 
 ## update\_advanced\_workflow
 
-Mettre à jour un workflow avancé existant. Vous pouvez mettre à jour toute combinaison de nom, description, nœuds et arêtes.
+Een bestaande geavanceerde workflow bijwerken. U kunt elke combinatie van naam, beschrijving, nodes en edges bijwerken.
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `workflow_id` | string | Oui | UUID du workflow à mettre à jour |
-| `name` | string | Non | Nouveau nom |
-| `description` | string | Non | Nouvelle description |
-| `nodes` | array | Non | Nouveaux nœuds (remplace tous les nœuds existants) |
-| `edges` | array | Non | Nouvelles arêtes (remplace toutes les arêtes existantes) |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `workflow_id` | string | Ja | UUID van de bij te werken workflow |
+| `name` | string | Nee | Nieuwe naam |
+| `description` | string | Nee | Nieuwe beschrijving |
+| `nodes` | array | Nee | Nieuwe nodes (vervangt alle bestaande nodes) |
+| `edges` | array | Nee | Nieuwe edges (vervangt alle bestaande edges) |
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 {
@@ -195,15 +195,15 @@ Mettre à jour un workflow avancé existant. Vous pouvez mettre à jour toute co
 
 ## delete\_workflow
 
-Supprimer un workflow par ID (suppression logique).
+Een workflow verwijderen op basis van ID (zachte verwijdering).
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `workflow_id` | string | Oui | UUID du workflow à supprimer |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `workflow_id` | string | Ja | UUID van de te verwijderen workflow |
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 {
@@ -214,16 +214,16 @@ Supprimer un workflow par ID (suppression logique).
 
 ## test\_advanced\_workflow
 
-Tester l'exécution d'un workflow avancé. Vous pouvez optionnellement fournir un ID de document pour tester avec un document réel.
+Een geavanceerde workflow-uitvoering testen. Optioneel kunt u een document-ID opgeven om met een echt document te testen.
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `workflow_id` | string | Oui | UUID du workflow avancé |
-| `doc_id` | string | Non | UUID d'un document pour le test |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `workflow_id` | string | Ja | UUID van de geavanceerde workflow |
+| `doc_id` | string | Nee | UUID van een document om mee te testen |
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 {
@@ -249,11 +249,11 @@ Tester l'exécution d'un workflow avancé. Vous pouvez optionnellement fournir u
 
 ## list\_test\_scenarios
 
-Lister tous les scénarios de test de workflow pour l'organisation.
+Alle testscenario's voor workflows van de organisatie weergeven.
 
-**Paramètres :** Aucun
+**Parameters:** Geen
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 [
@@ -270,11 +270,11 @@ Lister tous les scénarios de test de workflow pour l'organisation.
 
 ## list\_cards
 
-Lister toutes les cartes de workflow disponibles avec leurs conditions et configuration.
+Alle beschikbare workflowkaarten weergeven met hun condities en configuratie.
 
-**Paramètres :** Aucun
+**Parameters:** Geen
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 [
@@ -302,5 +302,5 @@ Lister toutes les cartes de workflow disponibles avec leurs conditions et config
 ```
 
 {% hint style="info" %}
-Les cartes ont des indicateurs de rôle : `when_condition` (déclencheur), `and_condition` (condition supplémentaire) et `then_condition` (action). Utilisez-les pour déterminer dans quels types de nœuds une carte peut être utilisée.
+Kaarten hebben rolvlaggen: `when_condition` (trigger), `and_condition` (aanvullende voorwaarde) en `then_condition` (actie). Gebruik deze om te bepalen in welke nodetypes een kaart kan worden gebruikt.
 {% endhint %}

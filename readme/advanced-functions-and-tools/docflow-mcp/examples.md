@@ -1,14 +1,14 @@
-# Exemples
+# Voorbeelden
 
-Exemples complets de bout en bout montrant comment utiliser les outils DocFlow MCP ensemble.
+Volledige end-to-end voorbeelden die laten zien hoe u DocFlow MCP-tools samen kunt gebruiken.
 
-## Exemple 1 : Créer une carte personnalisée et l'utiliser dans un workflow
+## Voorbeeld 1: Een aangepaste kaart aanmaken en gebruiken in een workflow
 
-Cet exemple parcourt le cycle de vie complet : créer une carte partenaire, la valider, la tester, l'approuver et construire un workflow qui l'utilise.
+Dit voorbeeld doorloopt de volledige levenscyclus: een partnerkaart aanmaken, valideren, testen, goedkeuren en een workflow bouwen die deze gebruikt.
 
-### Étape 1 : Créer la carte
+### Stap 1: De kaart aanmaken
 
-Appelez `sdk_create_card` :
+Roep `sdk_create_card` aan:
 
 ```json
 {
@@ -41,11 +41,11 @@ Appelez `sdk_create_card` :
 }
 ```
 
-Notez le `card_id` de la réponse -- vous en aurez besoin dans les étapes suivantes.
+Noteer het `card_id` uit de respons — u heeft dit nodig in de volgende stappen.
 
-### Étape 2 : Valider la carte
+### Stap 2: De kaart valideren
 
-Appelez `sdk_validate_card` avec l'ID de la carte :
+Roep `sdk_validate_card` aan met het kaart-ID:
 
 ```json
 {
@@ -53,11 +53,11 @@ Appelez `sdk_validate_card` avec l'ID de la carte :
 }
 ```
 
-Examinez le rapport de validation. Les 5 étapes doivent réussir.
+Bekijk het validatierapport. Alle 5 fasen moeten slagen.
 
-### Étape 3 : Tester la carte
+### Stap 3: De kaart testen
 
-Appelez `sdk_test_card` avec un contexte de document simulé :
+Roep `sdk_test_card` aan met een gesimuleerde documentcontext:
 
 ```json
 {
@@ -73,11 +73,11 @@ Appelez `sdk_test_card` avec un contexte de document simulé :
 }
 ```
 
-Vérifiez que la réponse affiche `CardStatus.SUCCESS`.
+Controleer of de respons `CardStatus.SUCCESS` toont.
 
-### Étape 4 : Approuver la carte
+### Stap 4: De kaart goedkeuren
 
-Appelez `sdk_approve_card` (nécessite un administrateur) :
+Roep `sdk_approve_card` aan (vereist admin):
 
 ```json
 {
@@ -85,13 +85,13 @@ Appelez `sdk_approve_card` (nécessite un administrateur) :
 }
 ```
 
-La carte est maintenant active et disponible pour une utilisation dans les workflows.
+De kaart is nu actief en beschikbaar voor gebruik in workflows.
 
-### Étape 5 : Construire un workflow avec la carte
+### Stap 5: Een workflow bouwen met de kaart
 
-D'abord, obtenez les cartes disponibles en utilisant `list_cards` ou `sdk_list_cards_picker` pour trouver les IDs de cartes.
+Haal eerst de beschikbare kaarten op met `list_cards` of `sdk_list_cards_picker` om kaart-ID's te vinden.
 
-Puis appelez `create_advanced_workflow` :
+Roep vervolgens `create_advanced_workflow` aan:
 
 ```json
 {
@@ -137,9 +137,9 @@ Puis appelez `create_advanced_workflow` :
 }
 ```
 
-### Étape 6 : Tester le workflow
+### Stap 6: De workflow testen
 
-Appelez `test_advanced_workflow` :
+Roep `test_advanced_workflow` aan:
 
 ```json
 {
@@ -147,17 +147,17 @@ Appelez `test_advanced_workflow` :
 }
 ```
 
-Examinez les journaux d'exécution pour vérifier que chaque nœud s'est exécuté correctement.
+Bekijk de uitvoeringslogboeken om te verifiëren dat elke node correct is uitgevoerd.
 
 ---
 
-## Exemple 2 : Construire un workflow avec des cartes intégrées
+## Voorbeeld 2: Een workflow bouwen met ingebouwde kaarten
 
-Cet exemple crée un workflow en utilisant uniquement des cartes intégrées (aucune carte personnalisée nécessaire).
+Dit voorbeeld maakt een workflow aan met alleen ingebouwde kaarten (geen aangepaste kaarten nodig).
 
-### Étape 1 : Découvrir les cartes disponibles
+### Stap 1: Beschikbare kaarten ontdekken
 
-Appelez `sdk_list_cards_picker` pour voir toutes les cartes disponibles avec leurs indicateurs de rôle :
+Roep `sdk_list_cards_picker` aan om alle beschikbare kaarten met hun rolvlaggen te bekijken:
 
 ```json
 // Response includes cards like:
@@ -170,12 +170,12 @@ Appelez `sdk_list_cards_picker` pour voir toutes les cartes disponibles avec leu
 }
 ```
 
-Filtrez par rôle :
-- `is_when: true` — Utiliser dans les nœuds WHEN (déclencheurs)
-- `is_and: true` — Utiliser dans les nœuds AND (conditions supplémentaires)
-- `is_then: true` — Utiliser dans les nœuds THEN (actions)
+Filter op rol:
+- `is_when: true` — Gebruik in WHEN-nodes (triggers)
+- `is_and: true` — Gebruik in AND-nodes (aanvullende voorwaarden)
+- `is_then: true` — Gebruik in THEN-nodes (acties)
 
-### Étape 2 : Créer le workflow
+### Stap 2: De workflow aanmaken
 
 ```json
 {
@@ -246,13 +246,13 @@ Filtrez par rôle :
 }
 ```
 
-Cela crée un workflow : **WHEN** le document est une facture **AND** le montant > 1000 **THEN** définir le statut sur révision.
+Dit maakt een workflow aan: **WHEN** document is een factuur **AND** bedrag > 1000 **THEN** status instellen op beoordeling.
 
 ---
 
-## Exemple 3 : Importer des cartes depuis GitHub
+## Voorbeeld 3: Kaarten importeren vanuit GitHub
 
-Si vos cartes partenaires se trouvent dans un dépôt GitHub, vous pouvez les importer directement :
+Als uw partnerkaarten zich in een GitHub-repository bevinden, kunt u ze rechtstreeks importeren:
 
 ```json
 {
@@ -261,7 +261,7 @@ Si vos cartes partenaires se trouvent dans un dépôt GitHub, vous pouvez les im
 }
 ```
 
-Pour les dépôts privés, incluez un jeton GitHub :
+Voor privérepositories voegt u een GitHub-token toe:
 
 ```json
 {
@@ -271,4 +271,4 @@ Pour les dépôts privés, incluez un jeton GitHub :
 }
 ```
 
-Après l'importation, les cartes passent automatiquement par la validation. Vérifiez leur statut avec `sdk_list_submissions` et approuvez-les avec `sdk_approve_card`.
+Na het importeren doorlopen de kaarten automatisch de validatie. Controleer hun status met `sdk_list_submissions` en keur ze goed met `sdk_approve_card`.

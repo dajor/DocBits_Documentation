@@ -1,37 +1,37 @@
-# Outils du SDK de cartes
+# Card SDK Tools
 
-Les outils du SDK de cartes vous permettent de créer, valider, tester et gérer des cartes partenaires personnalisées via MCP. Les cartes partenaires étendent DocFlow avec une logique métier personnalisée écrite en Python.
+De Card SDK-tools stellen u in staat om aangepaste partnerkaarten aan te maken, te valideren, te testen en te beheren via MCP. Partnerkaarten breiden DocFlow uit met aangepaste bedrijfslogica geschreven in Python.
 
-## Cycle de vie des cartes
+## Levenscyclus van kaarten
 
 ```
 Create → Validate → Test → Approve → Use in Workflows
 ```
 
-1. **Créer** une carte avec `sdk_create_card` ou `sdk_import_github`
-2. **Valider** avec `sdk_validate_card` (validation en 5 étapes)
-3. **Tester** avec `sdk_test_card` (exécution sandboxée)
-4. **Approuver** avec `sdk_approve_card` (administrateur requis)
-5. La carte est maintenant disponible dans `list_cards` et peut être utilisée dans les workflows
+1. **Aanmaken** van een kaart met `sdk_create_card` of `sdk_import_github`
+2. **Valideren** met `sdk_validate_card` (5-fasen validatie)
+3. **Testen** met `sdk_test_card` (uitvoering in sandbox)
+4. **Goedkeuren** met `sdk_approve_card` (admin vereist)
+5. De kaart is nu beschikbaar in `list_cards` en kan worden gebruikt in workflows
 
-## Outils de développement
+## Ontwikkeltools
 
 ### sdk\_create\_card
 
-Créer une nouvelle carte partenaire à partir du code source et des manifestes. Exécute la validation complète en 5 étapes et enregistre la carte dans la base de données. La carte démarre dans un état en attente et nécessite l'approbation d'un administrateur pour être activée.
+Een nieuwe partnerkaart aanmaken vanuit broncode en manifesten. Voert volledige 5-fasen validatie uit en slaat de kaart op in de database. De kaart begint in een wachtende status en vereist goedkeuring van een admin om te activeren.
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `app_manifest` | object | Oui | Manifeste de l'application avec id, nom, version, infos partenaire |
-| `card_manifest` | object | Oui | Manifeste de la carte avec id, titre, entry\_point, class\_name, args |
-| `card_type` | string | Oui | `action` ou `condition` |
-| `source_code` | string | Oui | Code source Python (doit étendre `PartnerCard`) |
-| `test_code` | string | Oui | Code de test Pytest pour la carte |
-| `locales` | object | Non | Traductions locales, ex. `{"en": {...}, "de": {...}}` |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `app_manifest` | object | Ja | App-manifest met id, naam, versie, partnerinfo |
+| `card_manifest` | object | Ja | Kaartmanifest met id, titel, entry\_point, class\_name, args |
+| `card_type` | string | Ja | `action` of `condition` |
+| `source_code` | string | Ja | Python-broncode (moet `PartnerCard` uitbreiden) |
+| `test_code` | string | Ja | Pytest-testcode voor de kaart |
+| `locales` | object | Nee | Taalvertalingen, bijv. `{"en": {...}, "de": {...}}` |
 
-**Exemple de manifeste d'application :**
+**Voorbeeld App-manifest:**
 
 ```json
 {
@@ -45,7 +45,7 @@ Créer une nouvelle carte partenaire à partir du code source et des manifestes.
 }
 ```
 
-**Exemple de manifeste de carte :**
+**Voorbeeld Kaartmanifest:**
 
 ```json
 {
@@ -64,7 +64,7 @@ Créer une nouvelle carte partenaire à partir du code source et des manifestes.
 }
 ```
 
-**Exemple de code source :**
+**Voorbeeld broncode:**
 
 ```python
 from api.sdk.base import PartnerCard
@@ -85,7 +85,7 @@ class AmountThreshold(PartnerCard):
         )
 ```
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 {
@@ -106,49 +106,49 @@ class AmountThreshold(PartnerCard):
 
 ### sdk\_validate\_card
 
-Exécuter la validation en 5 étapes sur une carte partenaire sans l'enregistrer. Deux modes :
+5-fasen validatie uitvoeren op een partnerkaart zonder op te slaan. Twee modi:
 
-- **Mode A** — Valider une carte existante par ID
-- **Mode B** — Valider un nouveau code source en ligne
+- **Modus A** — Een bestaande kaart valideren op basis van ID
+- **Modus B** — Nieuwe broncode inline valideren
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `card_id` | string | Non | UUID de la carte existante (Mode A) |
-| `app_manifest` | object | Non | Manifeste de l'application (Mode B) |
-| `card_manifest` | object | Non | Manifeste de la carte (Mode B) |
-| `card_type` | string | Non | `action` ou `condition` (Mode B) |
-| `source_code` | string | Non | Code source Python (Mode B) |
-| `test_code` | string | Non | Code de test (Mode B) |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `card_id` | string | Nee | UUID van bestaande kaart (Modus A) |
+| `app_manifest` | object | Nee | App-manifest (Modus B) |
+| `card_manifest` | object | Nee | Kaartmanifest (Modus B) |
+| `card_type` | string | Nee | `action` of `condition` (Modus B) |
+| `source_code` | string | Nee | Python-broncode (Modus B) |
+| `test_code` | string | Nee | Testcode (Modus B) |
 
 {% hint style="info" %}
-Fournissez soit `card_id` seul (Mode A), soit `app_manifest` + `card_manifest` + `source_code` ensemble (Mode B).
+Geef ofwel alleen `card_id` op (Modus A) of `app_manifest` + `card_manifest` + `source_code` samen (Modus B).
 {% endhint %}
 
-**Étapes de validation :**
+**Validatiefasen:**
 
-1. **Structure** — Vérifie la disposition des fichiers, le schéma du manifeste, les fichiers requis
-2. **Analyse AST** — Vérifie la syntaxe Python, la hiérarchie des classes, les signatures de méthodes
-3. **Dépendances** — Valide les imports par rapport aux modules autorisés
-4. **Tests** — Exécute la suite de tests de la carte
-5. **Comportemental** — Exécute la carte en sandbox pour vérifier le comportement à l'exécution
+1. **Structuur** — Controleert bestandsindeling, manifestschema, vereiste bestanden
+2. **AST-analyse** — Controleert Python-syntaxis, klassehiërarchie, methodesignaturen
+3. **Afhankelijkheden** — Valideert imports tegen toegestane modules
+4. **Tests** — Voert de testsuite van de kaart uit
+5. **Gedrag** — Voert de kaart uit in een sandbox om runtime-gedrag te controleren
 
 ### sdk\_test\_card
 
-Exécuter une carte partenaire dans un environnement sandboxé avec un contexte simulé. Utilise le même modèle de sécurité qu'en production (builtins restreints, liste blanche d'imports, timeout de 10 secondes).
+Een partnerkaart uitvoeren in een sandboxomgeving met een gesimuleerde context. Gebruikt hetzelfde beveiligingsmodel als productie (beperkte builtins, importwhitelist, 10 seconden timeout).
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `card_id` | string | Non | UUID de la carte existante (Mode A) |
-| `source_code` | string | Non | Code source pour le test en ligne (Mode B) |
-| `class_name` | string | Non | Nom de la classe pour le test en ligne (Mode B) |
-| `variables` | object | Non | Variables à passer au constructeur de la carte |
-| `mock_context` | object | Non | Contexte d'exécution simulé |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `card_id` | string | Nee | UUID van bestaande kaart (Modus A) |
+| `source_code` | string | Nee | Broncode voor inline testen (Modus B) |
+| `class_name` | string | Nee | Klassenaam voor inline testen (Modus B) |
+| `variables` | object | Nee | Variabelen om aan de kaartconstructor door te geven |
+| `mock_context` | object | Nee | Gesimuleerde uitvoeringscontext |
 
-**Champs du contexte simulé :**
+**Velden gesimuleerde context:**
 
 ```json
 {
@@ -165,7 +165,7 @@ Exécuter une carte partenaire dans un environnement sandboxé avec un contexte 
 }
 ```
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 {
@@ -179,17 +179,17 @@ Exécuter une carte partenaire dans un environnement sandboxé avec un contexte 
 
 ### sdk\_import\_github
 
-Importer une application partenaire depuis un dépôt GitHub. Clone le dépôt, lit `app.json` et importe toutes les cartes trouvées dans le répertoire `.docflowcompose`.
+Een partnerapp importeren vanuit een GitHub-repository. Kloont de repository, leest `app.json` en importeert alle kaarten die gevonden worden in de `.docflowcompose`-map.
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `github_url` | string | Oui | URL HTTPS GitHub (ex. `https://github.com/org/repo`) |
-| `branch` | string | Non | Branche à cloner (par défaut : `main`) |
-| `token` | string | Non | Jeton GitHub pour les dépôts privés |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `github_url` | string | Ja | GitHub HTTPS-URL (bijv. `https://github.com/org/repo`) |
+| `branch` | string | Nee | Branch om te klonen (standaard: `main`) |
+| `token` | string | Nee | GitHub-token voor privérepositories |
 
-**Structure de dépôt attendue :**
+**Verwachte repositorystructuur:**
 
 ```
 repo/
@@ -207,7 +207,7 @@ repo/
     test_card.py
 ```
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 {
@@ -219,15 +219,15 @@ repo/
 }
 ```
 
-## Outils de gestion
+## Beheertools
 
 ### sdk\_list\_submissions
 
-Lister toutes les soumissions de cartes partenaires pour l'organisation actuelle.
+Alle partnerkaartinzendingen voor de huidige organisatie weergeven.
 
-**Paramètres :** Aucun
+**Parameters:** Geen
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 [
@@ -246,15 +246,15 @@ Lister toutes les soumissions de cartes partenaires pour l'organisation actuelle
 
 ### sdk\_get\_submission\_status
 
-Obtenir le statut de validation et le rapport pour une soumission de carte partenaire spécifique.
+De validatiestatus en het rapport ophalen voor een specifieke partnerkaartinzending.
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `card_id` | string | Oui | UUID de la carte partenaire |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `card_id` | string | Ja | UUID van de partnerkaart |
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 {
@@ -275,54 +275,54 @@ Obtenir le statut de validation et le rapport pour une soumission de carte parte
 
 ### sdk\_approve\_card
 
-Approuver une carte partenaire validée et l'activer pour une utilisation dans les workflows. La carte est enregistrée dans le registre d'exécution et devient disponible dans `list_cards`.
+Een gevalideerde partnerkaart goedkeuren en activeren voor gebruik in workflows. De kaart wordt geregistreerd in het runtime-register en wordt beschikbaar in `list_cards`.
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `card_id` | string | Oui | UUID de la carte partenaire |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `card_id` | string | Ja | UUID van de partnerkaart |
 
 {% hint style="warning" %}
-Nécessite les permissions d'administrateur d'organisation. La carte doit être dans l'état `validated` ou `rejected`.
+Vereist organisatiebeheerderrechten. De kaart moet de status `validated` of `rejected` hebben.
 {% endhint %}
 
 ### sdk\_reject\_card
 
-Rejeter une soumission de carte partenaire et la désactiver.
+Een partnerkaartinzending afwijzen en deactiveren.
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `card_id` | string | Oui | UUID de la carte partenaire |
-| `reason` | string | Non | Motif du rejet |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `card_id` | string | Ja | UUID van de partnerkaart |
+| `reason` | string | Nee | Reden voor afwijzing |
 
 {% hint style="warning" %}
-Nécessite les permissions d'administrateur d'organisation.
+Vereist organisatiebeheerderrechten.
 {% endhint %}
 
 ### sdk\_delete\_submission
 
-Désactiver ou supprimer une soumission de carte partenaire. Les cartes rejetées ou désactivées sont physiquement supprimées de la base de données. Les cartes actives sont d'abord désactivées.
+Een partnerkaartinzending deactiveren of verwijderen. Afgewezen of uitgeschakelde kaarten worden fysiek uit de database verwijderd. Actieve kaarten worden eerst gedeactiveerd.
 
-**Paramètres :**
+**Parameters:**
 
-| Paramètre | Type | Obligatoire | Description |
-|-----------|------|-------------|-------------|
-| `card_id` | string | Oui | UUID de la carte partenaire |
+| Parameter | Type | Vereist | Beschrijving |
+|-----------|------|---------|-------------|
+| `card_id` | string | Ja | UUID van de partnerkaart |
 
 {% hint style="warning" %}
-Nécessite les permissions d'administrateur d'organisation.
+Vereist organisatiebeheerderrechten.
 {% endhint %}
 
 ### sdk\_list\_cards\_picker
 
-Lister toutes les cartes activées et non obsolètes avec les indicateurs de rôle. Utile pour déterminer quelles cartes peuvent être utilisées dans quels types de nœuds lors de la construction de workflows.
+Alle ingeschakelde, niet-verouderde kaarten met rolvlaggen weergeven. Handig om te bepalen welke kaarten in welke nodetypes kunnen worden gebruikt bij het bouwen van workflows.
 
-**Paramètres :** Aucun
+**Parameters:** Geen
 
-**Exemple de réponse :**
+**Voorbeeldrespons:**
 
 ```json
 [
