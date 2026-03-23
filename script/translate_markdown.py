@@ -16,7 +16,7 @@ def remove_markdown_code_blocks(text):
     Entfernt ```markdown am Anfang und ``` am Ende des Textes, falls vorhanden.
     
     Parameters:
-        text (str): Der zu bereinigende Text.
+        text (str): Der zu bereinigte Text.
     
     Returns:
         str: Der bereinigte Text ohne die spezifischen Markdown-Codeblöcke.
@@ -50,11 +50,58 @@ def list_available_models():
         logging.error(f"Error fetching models: {e}")
         sys.exit(1)
 
+def count_tokens(text):
+    """
+    Approximate token count for text.
+    Uses a simple heuristic: ~4 chars per token for English text.
+    For more accurate counting, use tiktoken library.
+    """
+    # Rough estimate: 1 token ≈ 4 characters for English text
+    # This is conservative; actual tokens may vary
+    return len(text) / 4
+
+def select_model_for_file(markdown_text, requested_model):
+    """
+    Select appropriate model based on file size.
+    - gpt-4o-mini (4096 token limit) for small files
+    - gpt-4o (128k token limit) for large files
+    
+    Returns: (model_name, reason_for_switch)
+    """
+    approx_tokens = count_tokens(markdown_text)
+    
+    # Token limits
+    GPT4O_MINI_LIMIT = 4096
+    GPT4O_LIMIT = 128000
+    
+    # If user explicitly requested a model, respect it unless it will fail
+    if requested_model in ['gpt-4o-mini', 'gpt-3.5-turbo', 'gpt-3.5-turbo-16k']:
+        if approx_tokens > GPT4O_MINI_LIMIT:
+            logging.warning(f"File exceeds gpt-4o-mini limit ({approx_tokens:.0f} tokens > {GPT4O_MINI_LIMIT} limit)")
+            logging.info(f"Auto-switching to gpt-4o (128k context) for large file")
+            return 'gpt-4o', 'auto-switched due to size'
+    
+    # If user requested gpt-4o or gpt-4o-mini, use as requested
+    if requested_model in ['gpt-4o', 'gpt-4o-mini']:
+        if requested_model == 'gpt-4o-mini' and approx_tokens > GPT4O_MINI_LIMIT:
+            logging.warning(f"File exceeds gpt-4o-mini limit ({approx_tokens:.0f} tokens > {GPT4O_MINI_LIMIT} limit)")
+            logging.info(f"Auto-switching to gpt-4o (128k context) for large file")
+            return 'gpt-4o', 'auto-switched due to size'
+        return requested_model, 'user-requested'
+    
+    # Default behavior: use gpt-4o-mini for small files, gpt-4o for large
+    if approx_tokens > GPT4O_MINI_LIMIT:
+        logging.info(f"Large file detected ({approx_tokens:.0f} tokens) - using gpt-4o (128k context)")
+        return 'gpt-4o', 'auto-selected for size'
+    else:
+        logging.info(f"Small file ({approx_tokens:.0f} tokens) - using gpt-4o-mini (cost-optimized)")
+        return 'gpt-4o-mini', 'auto-selected for size'
+
 def translate_text(text, target_lang, model):
     # Set up your OpenAI API key
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
-    logging.debug(f"Translating text with length {len(text)} characters.")
+    logging.debug(f"Translating text with length {len(text)} characters using model: {model}")
 
     # Define the prompt with explicit instructions
     prompt = f"""
@@ -75,7 +122,7 @@ Text to translate:
 
     # Prepare messages based on model capabilities
     messages = []
-    if model in ['gpt-3.5-turbo', 'gpt-3.5-turbo-16k', 'gpt-4', 'gpt-4-32k']:  # Models that support 'system' role
+    if model in ['gpt-3.5-turbo', 'gpt-3.5-turbo-16k', 'gpt-4', 'gpt-4-32k', 'gpt-4o', 'gpt-4o-mini']:  # Models that support 'system' role
         messages.append({"role": "system", "content": "You are a helpful assistant that translates English Markdown documents to other languages while preserving formatting and not altering code or special syntax."})
         messages.append({"role": "user", "content": prompt})
     else:
@@ -124,7 +171,7 @@ def main():
     parser.add_argument('language', nargs='?', help='Target language (e.g., "French")')
     parser.add_argument('input_file', nargs='?', help='Input Markdown file')
     parser.add_argument('output_file', nargs='?', help='Output Markdown file', default=None)
-    parser.add_argument('--model', help='OpenAI model to use (default: gpt-3.5-turbo)', default='gpt-3.5-turbo')
+    parser.add_argument('--model', help='OpenAI model to use (default: gpt-4o-mini)', default='gpt-4o-mini')
     parser.add_argument('--list-models', action='store_true', help='List available OpenAI models and exit')
     parser.add_argument('--debug', action='store_true', help='Enable debug logging')
 
@@ -158,23 +205,27 @@ def main():
     with open(args.input_file, 'r', encoding='utf-8') as f:
         markdown_text = f.read()
 
-    # Check if the content exceeds token limits
-    approx_tokens = len(markdown_text.split()) * 1.5  # Approximate token count
+    # Auto-select model based on file size if user didn't explicitly override
+    selected_model, selection_reason = select_model_for_file(markdown_text, args.model)
+    
+    logging.info(f"Model selection: {selected_model} ({selection_reason})")
+    
+    # Token limit info for logging
+    approx_tokens = count_tokens(markdown_text)
     model_token_limits = {
         'gpt-3.5-turbo': 4096,
         'gpt-3.5-turbo-16k': 16384,
         'gpt-4': 8192,
         'gpt-4-32k': 32768,
+        'gpt-4o-mini': 4096,
+        'gpt-4o': 128000,
     }
-    max_tokens = model_token_limits.get(args.model, 4096)
+    max_tokens = model_token_limits.get(selected_model, 4096)
 
-    if approx_tokens > max_tokens:
-        logging.error(f"The input file is too large for the selected model ({args.model}).")
-        logging.error(f"Approximate tokens: {approx_tokens}, Model limit: {max_tokens}")
-        sys.exit(1)
+    logging.info(f"File size: ~{approx_tokens:.0f} tokens, Model limit: {max_tokens} tokens")
 
     try:
-        translated_markdown = translate_markdown(markdown_text, args.language, args.model)
+        translated_markdown = translate_markdown(markdown_text, args.language, selected_model)
     except Exception as e:
         logging.error(f"An error occurred during translation:\n\n{e}")
         sys.exit(1)
@@ -201,11 +252,12 @@ def main():
         'gpt-3.5-turbo-16k': 0.003,       # $0.003 per 1K tokens
         'gpt-4': 0.03,                    # $0.03 per 1K tokens
         'gpt-4-32k': 0.06,                # $0.06 per 1K tokens
-        # Add other models as needed
+        'gpt-4o-mini': 0.00015,           # $0.00015 per 1K tokens (cheaper)
+        'gpt-4o': 0.005,                  # $0.005 per 1K tokens (more expensive but larger context)
     }
 
     # Determine price per 1K tokens
-    model_price_per_1k = pricing.get(args.model, 0.002)  # Default to $0.002 per 1K tokens
+    model_price_per_1k = pricing.get(selected_model, 0.002)  # Default to $0.002 per 1K tokens
 
     # Calculate cost in USD
     cost_usd = (total_tokens_used / 1000) * model_price_per_1k
