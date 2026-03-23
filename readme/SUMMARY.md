@@ -211,6 +211,7 @@
     * [Permisos del Proveedor](administration-and-setup/settings/supplier-setting/supplier-permissions.md)
   * [Gestión de Caché](administration-and-setup/settings/cache-management.md)
 * [Flujo de trabajo](administration-and-setup/workflow/README.md)
+  * [Panel de Flujos de Trabajo](administration-and-setup/workflow/workflow-dashboard.md)
   * [Cuando](administration-and-setup/workflow/when/README.md)
     * [Descripción de la tarjeta](administration-and-setup/workflow/when/card-description.md)
     * [Operación de Tipo de Documento](administration-and-setup/workflow/when/page.md)
