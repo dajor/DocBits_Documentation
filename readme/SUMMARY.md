@@ -636,6 +636,11 @@
 ## Advanced functions and tools
 
 * [DocNet](advanced-functions-and-tools/docnet/README.md)
+* [DocFlow MCP](advanced-functions-and-tools/docflow-mcp/README.md)
+  * [Setup & Configuration](advanced-functions-and-tools/docflow-mcp/setup-and-configuration.md)
+  * [Workflow Tools](advanced-functions-and-tools/docflow-mcp/workflow-tools.md)
+  * [Card SDK Tools](advanced-functions-and-tools/docflow-mcp/card-sdk-tools.md)
+  * [Examples](advanced-functions-and-tools/docflow-mcp/examples.md)
 * [DocBits Operator](advanced-functions-and-tools/docbits-operator/README.md)
   * [Prompt Writing Guide](advanced-functions-and-tools/docbits-operator/prompt-writing-guide.md)
   * [Triggering Prompts with a Workflow](advanced-functions-and-tools/docbits-operator/triggering-prompts-with-a-workflow/README.md)
