@@ -208,6 +208,7 @@
     * [Konfiguracja eksportu dla Supplier Portal dla M3](administration-and-setup/settings/supplier-setting/export-configuration-for-supplier-portal-for-m3.md)
   * [Zarządzanie pamięcią podręczną](administration-and-setup/settings/cache-management.md)
 * [Przepływ Pracy](administration-and-setup/workflow/README.md)
+  * [Panel Workflow](administration-and-setup/workflow/workflow-dashboard.md)
   * [Kiedy](administration-and-setup/workflow/when/README.md)
     * [Opis karty](administration-and-setup/workflow/when/card-description.md)
     * [Operator dokumentu dla podorganizacji](administration-and-setup/workflow/when/document-operator-for-sub-organizations.md)
