@@ -225,7 +225,8 @@ def translate_markdown(markdown_text, target_lang, model, chunk_size: int = None
             logging.warning(f"File ({actual_tokens} tokens) exceeds {model}'s limit ({model_max} tokens)")
             
             # Option 1: Auto-switch to gpt-4o for large files
-            if auto_switch_model and model in ['gpt-4o-mini', 'gpt-4o-mini-2024-07-18']:
+            if auto_switch_model and model_max <= 4096:
+                # Switch to gpt-4o for any model with 4k or smaller limit
                 new_model = 'gpt-4o'
                 new_max = MODEL_TOKEN_LIMITS.get(new_model, 128000)
                 logging.info(f"Auto-switching to {new_model} (limit: {new_max} tokens) for large file")
