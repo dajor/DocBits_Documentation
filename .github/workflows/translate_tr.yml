@@ -122,5 +122,8 @@ jobs:
           # Commit if there are changes
           git commit -m "Add Turkish translations for updated Markdown files" || echo "No changes to commit"
 
+          # Pull latest changes from remote to avoid race condition with concurrent workflows
+          git pull --rebase origin $BRANCH
+
           # Push the changes back to the main branch
-          git push origin de
+          git push origin $BRANCH
