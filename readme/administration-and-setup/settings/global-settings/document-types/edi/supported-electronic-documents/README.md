@@ -32,6 +32,14 @@ For detailed configuration, see [EDI Settings](../README.md). For Peppol, XRechn
 
 ## Europe
 
+<figure><img src="edocs-infographic-europe.png" alt="European Electronic Document Standards supported by DocBits"><figcaption><p>European E-Invoice Standards Overview</p></figcaption></figure>
+
+### 🇩🇪 Germany
+
+<figure><img src="edocs-infographic-germany-xrechnung.png" alt="XRechnung versions supported by DocBits"><figcaption><p>XRechnung — All 26 Versions (CII &amp; UBL)</p></figcaption></figure>
+
+<figure><img src="edocs-infographic-germany-zugferd.png" alt="ZUGFeRD and Factur-X versions supported by DocBits"><figcaption><p>ZUGFeRD / Factur-X — All Versions</p></figcaption></figure>
+
 ### 🇦🇹 Austria
 
 | Standard | Page |
@@ -153,6 +161,8 @@ For detailed configuration, see [EDI Settings](../README.md). For Peppol, XRechn
 
 ## Asia-Pacific
 
+<figure><img src="edocs-infographic-apac.png" alt="Asia-Pacific Electronic Document Standards supported by DocBits"><figcaption><p>Asia-Pacific E-Invoice Standards Overview</p></figcaption></figure>
+
 ### 🇦🇺 Australia / 🇳🇿 New Zealand
 
 | Standard | Page |
@@ -228,6 +238,8 @@ For detailed configuration, see [EDI Settings](../README.md). For Peppol, XRechn
 
 ## Latin America
 
+<figure><img src="edocs-infographic-latam.png" alt="Latin American Electronic Document Standards supported by DocBits"><figcaption><p>Latin America E-Invoice Standards Overview</p></figcaption></figure>
+
 ### 🇧🇷 Brazil
 
 | Standard | Page |
@@ -296,6 +308,8 @@ For detailed configuration, see [EDI Settings](../README.md). For Peppol, XRechn
 
 ## Middle East & Central Asia
 
+<figure><img src="edocs-infographic-mena.png" alt="Middle East Electronic Document Standards supported by DocBits"><figcaption><p>Middle East &amp; Central Asia E-Invoice Standards Overview</p></figcaption></figure>
+
 ### 🇰🇿 Kazakhstan
 
 | Standard | Page |
@@ -327,6 +341,8 @@ For detailed configuration, see [EDI Settings](../README.md). For Peppol, XRechn
 ---
 
 ## International Standards
+
+<figure><img src="edocs-infographic-international.png" alt="International Electronic Document Standards supported by DocBits"><figcaption><p>International Standards Overview (Peppol, UBL, EDIFACT, SPS Commerce)</p></figcaption></figure>
 
 | Standard | Page |
 |----------|------|
