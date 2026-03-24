@@ -109,7 +109,9 @@ jobs:
             # Run the translation script
             # Export the OpenAI API key as an environment variable
             export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
-            python ./script/translate_markdown.py "$LANGUAGE" "$file" "$output_file" --model gpt-4o-mini-2024-07-18
+            # Use gpt-4o which handles both small and large files (128k context)
+            # Script auto-switches from gpt-4o-mini to gpt-4o if file exceeds 4096 tokens
+            python ./script/translate_markdown.py "$LANGUAGE" "$file" "$output_file" --model gpt-4o
           done
 
       - name: Commit and Push Translated Files
