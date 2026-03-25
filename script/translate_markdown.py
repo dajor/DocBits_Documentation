@@ -4,12 +4,51 @@ import sys
 import openai
 import requests
 import logging
-from typing import List
+from typing import List, Tuple
+import tiktoken
 
 # Initialize total_tokens_used
 total_tokens_used = 0
 
 import re
+
+# Default chunk size (tokens) - safe margin below model limits
+DEFAULT_CHUNK_SIZE = 3500
+
+# Model token limits
+MODEL_TOKEN_LIMITS = {
+    'gpt-3.5-turbo': 4096,
+    'gpt-3.5-turbo-16k': 16384,
+    'gpt-4': 8192,
+    'gpt-4-32k': 32768,
+    'gpt-4o-mini': 4096,
+    'gpt-4o-mini-2024-07-18': 4096,
+    'gpt-4o': 128000,
+    'gpt-4o-2024-08-06': 128000,
+}
+
+# Models with large context that we can switch to for big files
+LARGE_CONTEXT_MODELS = ['gpt-4o', 'gpt-4o-2024-08-06', 'gpt-4-32k']
+
+def count_tokens(text: str, model: str = 'gpt-4o-mini') -> int:
+    """
+    Count tokens accurately using tiktoken.
+    
+    Parameters:
+        text: The text to count tokens for
+        model: The model encoding to use
+    
+    Returns:
+        Approximate token count
+    """
+    try:
+        # Get the encoding for the model
+        encoding = tiktoken.encoding_for_model(model)
+        tokens = encoding.encode(text)
+        return len(tokens)
+    except Exception:
+        # Fallback to rough estimation if tiktoken fails
+        return len(text.split()) * 1.5
 
 def remove_markdown_code_blocks(text):
     """
@@ -26,6 +65,50 @@ def remove_markdown_code_blocks(text):
     # Entfernt ``` am Ende
     text = re.sub(r'\n?```$', '', text)
     return text.strip()
+
+def split_into_chunks(text: str, chunk_size: int, model: str = 'gpt-4o-mini') -> List[str]:
+    """
+    Split markdown text into chunks that respect markdown structure.
+    Splits at heading boundaries (lines starting with #) when possible.
+    Uses accurate token counting.
+    
+    Parameters:
+        text: The markdown text to split
+        chunk_size: Maximum tokens per chunk
+        model: Model to use for token counting
+    
+    Returns:
+        List of text chunks
+    """
+    lines = text.split('\n')
+    chunks = []
+    current_chunk = []
+    current_tokens = 0
+    
+    for line in lines:
+        line_tokens = count_tokens(line, model)
+        
+        # Check if this is a heading line (potential split point)
+        is_heading = line.strip().startswith('#')
+        
+        if is_heading and current_tokens > 0:
+            # Start new chunk at heading
+            chunks.append('\n'.join(current_chunk))
+            current_chunk = [line]
+            current_tokens = line_tokens
+        elif current_tokens + line_tokens > chunk_size and current_tokens > 0:
+            # Force split if we exceed limit
+            chunks.append('\n'.join(current_chunk))
+            current_chunk = [line]
+            current_tokens = line_tokens
+        else:
+            current_chunk.append(line)
+            current_tokens += line_tokens
+    
+    if current_chunk:
+        chunks.append('\n'.join(current_chunk))
+    
+    return chunks
 
 def list_available_models():
     # Set up your OpenAI API key
@@ -109,13 +192,68 @@ Text to translate:
 
     return translated_text
 
-def translate_markdown(markdown_text, target_lang, model):
+def translate_markdown(markdown_text, target_lang, model, chunk_size: int = None, auto_switch_model: bool = True):
+    """
+    Translate markdown text, automatically chunking if it exceeds model limits.
+    For files exceeding gpt-4o-mini's 4096 token limit, either:
+    1. Split into chunks and translate separately, OR
+    2. Auto-switch to gpt-4o (128k context) if auto_switch_model is True
+    
+    Parameters:
+        markdown_text: The markdown content to translate
+        target_lang: Target language
+        model: OpenAI model to use
+        chunk_size: Optional chunk size in tokens (uses model limit if not specified)
+        auto_switch_model: If True and file is too large, switch to gpt-4o
+    
+    Returns:
+        Translated markdown text
+    """
     try:
-    # Translate the entire markdown text
-        translated_markdown = translate_text(markdown_text, target_lang, model)
+        # Determine chunk size based on model if not specified
+        if chunk_size is None:
+            max_tokens = MODEL_TOKEN_LIMITS.get(model, 4096)
+            chunk_size = min(max_tokens - 500, DEFAULT_CHUNK_SIZE)  # Leave margin
+        
+        # Count tokens accurately
+        actual_tokens = count_tokens(markdown_text, model)
+        
+        # Check if file exceeds model limit
+        model_max = MODEL_TOKEN_LIMITS.get(model, 4096)
+        
+        if actual_tokens > model_max:
+            logging.warning(f"File ({actual_tokens} tokens) exceeds {model}'s limit ({model_max} tokens)")
+            
+            # Option 1: Auto-switch to gpt-4o for large files
+            if auto_switch_model and model_max <= 4096:
+                # Switch to gpt-4o for any model with 4k or smaller limit
+                new_model = 'gpt-4o'
+                new_max = MODEL_TOKEN_LIMITS.get(new_model, 128000)
+                logging.info(f"Auto-switching to {new_model} (limit: {new_max} tokens) for large file")
+                return translate_markdown(markdown_text, target_lang, new_model, chunk_size=None, auto_switch_model=False)
+            
+            # Option 2: Fall back to chunking
+            logging.info(f"File too large ({actual_tokens} tokens), splitting into chunks of ~{chunk_size} tokens")
+            chunks = split_into_chunks(markdown_text, chunk_size, model)
+            logging.info(f"Split into {len(chunks)} chunks")
+            
+            translated_chunks = []
+            for i, chunk in enumerate(chunks, 1):
+                chunk_tokens = count_tokens(chunk, model)
+                logging.info(f"Translating chunk {i}/{len(chunks)} ({chunk_tokens} tokens)")
+                translated_chunk = translate_text(chunk, target_lang, model)
+                translated_chunks.append(translated_chunk)
+            
+            # Join translated chunks
+            translated_markdown = '\n\n'.join(translated_chunks)
+        else:
+            # File fits in single chunk
+            logging.info(f"Translating file as single chunk ({actual_tokens} tokens)")
+            translated_markdown = translate_text(markdown_text, target_lang, model)
+            
     except Exception as e:
-        logging.error(f"Error fetching models: {e}")
-        sys.exit(1)
+        logging.error(f"Error during translation: {e}")
+        raise
 
     return translated_markdown
 
@@ -124,9 +262,11 @@ def main():
     parser.add_argument('language', nargs='?', help='Target language (e.g., "French")')
     parser.add_argument('input_file', nargs='?', help='Input Markdown file')
     parser.add_argument('output_file', nargs='?', help='Output Markdown file', default=None)
-    parser.add_argument('--model', help='OpenAI model to use (default: gpt-3.5-turbo)', default='gpt-3.5-turbo')
+    parser.add_argument('--model', help='OpenAI model to use (default: gpt-4o-2024-08-06)', default='gpt-4o-2024-08-06')
     parser.add_argument('--list-models', action='store_true', help='List available OpenAI models and exit')
     parser.add_argument('--debug', action='store_true', help='Enable debug logging')
+    parser.add_argument('--chunk-size', type=int, help='Override chunk size in tokens (default: auto based on model)', default=None)
+    parser.add_argument('--no-auto-switch', action='store_true', help='Disable automatic model switching to gpt-4o for large files (use chunking instead)')
 
     args = parser.parse_args()
 
@@ -158,23 +298,9 @@ def main():
     with open(args.input_file, 'r', encoding='utf-8') as f:
         markdown_text = f.read()
 
-    # Check if the content exceeds token limits
-    approx_tokens = len(markdown_text.split()) * 1.5  # Approximate token count
-    model_token_limits = {
-        'gpt-3.5-turbo': 4096,
-        'gpt-3.5-turbo-16k': 16384,
-        'gpt-4': 8192,
-        'gpt-4-32k': 32768,
-    }
-    max_tokens = model_token_limits.get(args.model, 4096)
-
-    if approx_tokens > max_tokens:
-        logging.error(f"The input file is too large for the selected model ({args.model}).")
-        logging.error(f"Approximate tokens: {approx_tokens}, Model limit: {max_tokens}")
-        sys.exit(1)
-
     try:
-        translated_markdown = translate_markdown(markdown_text, args.language, args.model)
+        auto_switch = not args.no_auto_switch
+        translated_markdown = translate_markdown(markdown_text, args.language, args.model, chunk_size=args.chunk_size, auto_switch_model=auto_switch)
     except Exception as e:
         logging.error(f"An error occurred during translation:\n\n{e}")
         sys.exit(1)
@@ -201,11 +327,13 @@ def main():
         'gpt-3.5-turbo-16k': 0.003,       # $0.003 per 1K tokens
         'gpt-4': 0.03,                    # $0.03 per 1K tokens
         'gpt-4-32k': 0.06,                # $0.06 per 1K tokens
-        # Add other models as needed
+        'gpt-4o-mini': 0.00015,           # $0.00015 per 1K tokens
+        'gpt-4o': 0.005,                  # $0.005 per 1K tokens
+        'gpt-4o-2024-08-06': 0.005,       # $0.005 per 1K tokens
     }
 
     # Determine price per 1K tokens
-    model_price_per_1k = pricing.get(args.model, 0.002)  # Default to $0.002 per 1K tokens
+    model_price_per_1k = pricing.get(args.model, 0.005)  # Default to $0.005 per 1K tokens
 
     # Calculate cost in USD
     cost_usd = (total_tokens_used / 1000) * model_price_per_1k
