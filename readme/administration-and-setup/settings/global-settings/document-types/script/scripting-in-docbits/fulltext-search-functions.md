@@ -8,6 +8,10 @@ These functions require the **OPENSEARCH\_ENABLED** license/preference to be act
 
 Functions for searching document archives, finding similar documents, and querying ERP master data. These search across **all documents** of the organization — unlike `get_document_content()` which only reads the current document's text.
 
+{% hint style="success" %}
+**Security:** The `org_id` is automatically injected by the script sandbox. You never need to pass it — your scripts always operate within your own organization's data.
+{% endhint %}
+
 **Source:** `module/script/helper/document_script_functions.py`
 
 ---
@@ -17,14 +21,13 @@ Functions for searching document archives, finding similar documents, and queryi
 Searches the full OCR text of **all documents** in the organization. Finds text in `pages.pageText`, `tfidfCustomPageText` and `ai_text` fields via the fulltextsearch microservice.
 
 ```python
-fulltext_search(org_id, query, **kwargs)
+fulltext_search(query, **kwargs)
 ```
 
 **Parameters:**
 
 | Name | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
-| `org_id` | `str` | required | Organization UUID (use the `org_id` context variable) |
 | `query` | `str` | required | Search term (searched in OCR text of all documents) |
 | `search_type` | `str` | `"match_phrase"` | `"match_phrase"` (exact phrase), `"fuzzy"` (typo-tolerant, up to 2 char difference), `"prefix"` (starts with) |
 | `doc_type` | `str` | `None` | Filter by document type (comma-separated, e.g. `"INVOICE,CREDIT_NOTE"`) |
@@ -49,7 +52,7 @@ fulltext_search(org_id, query, **kwargs)
 **Example — Search for exact phrase:**
 
 ```python
-results = fulltext_search(org_id, "REVERSE CHARGE",
+results = fulltext_search("REVERSE CHARGE",
                           doc_type="INVOICE", size=10)
 for doc in results:
     print(doc["name"], doc["ocr_content"])
@@ -59,7 +62,7 @@ for doc in results:
 
 ```python
 # Finds "REVERSE CHARGE" even with OCR errors like "REVERS CHARG"
-results = fulltext_search(org_id, "REVERSE CHARGE",
+results = fulltext_search("REVERSE CHARGE",
                           search_type="fuzzy",
                           vendor_name="ACME Corp")
 ```
@@ -68,7 +71,7 @@ results = fulltext_search(org_id, "REVERSE CHARGE",
 
 ```python
 # Finds all documents containing words starting with "Rechn"
-results = fulltext_search(org_id, "Rechn", search_type="prefix",
+results = fulltext_search("Rechn", search_type="prefix",
                           date_range="last_90_days")
 ```
 
@@ -87,14 +90,13 @@ results = fulltext_search(org_id, "Rechn", search_type="prefix",
 Finds semantically similar documents using vector embeddings (k-NN search with 384-dimensional vectors). Useful for finding documents with similar content regardless of exact wording.
 
 ```python
-vector_search(org_id, doc_id, **kwargs)
+vector_search(doc_id, **kwargs)
 ```
 
 **Parameters:**
 
 | Name | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
-| `org_id` | `str` | required | Organization UUID |
 | `doc_id` | `str` | required | Source document UUID (the document to find similar matches for) |
 | `k` | `int` | `5` | Number of similar documents to return (capped at 50) |
 
@@ -112,7 +114,7 @@ vector_search(org_id, doc_id, **kwargs)
 
 ```python
 doc_id = document_json["doc_id"]
-similar = vector_search(org_id, doc_id, k=5)
+similar = vector_search(doc_id, k=5)
 for doc in similar:
     print(f"{doc['name']}: {doc['similarity_percent']}% similar")
 ```
@@ -128,14 +130,13 @@ for doc in similar:
 Searches ERP master data (vendors, purchase orders, customers, materials) indexed in OpenSearch.
 
 ```python
-fulltext_search_erp(org_id, query, **kwargs)
+fulltext_search_erp(query, **kwargs)
 ```
 
 **Parameters:**
 
 | Name | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
-| `org_id` | `str` | required | Organization UUID |
 | `query` | `str` | required | Search term |
 | `entity_types` | `str` | `None` | Filter by entity type (comma-separated: `"vendor"`, `"purchase_order"`, `"customer"`, `"material"`) |
 | `vendor_number` | `str` | `None` | Filter by vendor number |
@@ -150,7 +151,7 @@ fulltext_search_erp(org_id, query, **kwargs)
 ```python
 vendor = get_field_value(document_data, "supplier_name", "")
 if vendor:
-    matches = fulltext_search_erp(org_id, vendor,
+    matches = fulltext_search_erp(vendor,
                                    entity_types="vendor", size=5)
     if not matches:
         set_field_as_invalid(document_data, "supplier_name",
@@ -162,7 +163,7 @@ if vendor:
 ```python
 po_number = get_field_value(document_data, "purchase_order", "")
 if po_number:
-    results = fulltext_search_erp(org_id, po_number,
+    results = fulltext_search_erp(po_number,
                                    entity_types="purchase_order")
     if results:
         # PO found in ERP
@@ -176,14 +177,13 @@ if po_number:
 Returns autocomplete suggestions for search terms. Groups results by category (vendors, filenames, invoice numbers).
 
 ```python
-fulltext_suggestions(org_id, query, **kwargs)
+fulltext_suggestions(query, **kwargs)
 ```
 
 **Parameters:**
 
 | Name | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
-| `org_id` | `str` | required | Organization UUID |
 | `query` | `str` | required | Prefix / search term |
 | `limit` | `int` | `10` | Max suggestions per category (capped at 20) |
 
@@ -200,7 +200,7 @@ fulltext_suggestions(org_id, query, **kwargs)
 **Example — Get vendor suggestions:**
 
 ```python
-suggestions = fulltext_suggestions(org_id, "ACM", limit=5)
+suggestions = fulltext_suggestions("ACM", limit=5)
 vendor_list = suggestions.get("vendors", [])
 ```
 
@@ -214,10 +214,10 @@ vendor_list = suggestions.get("vendors", [])
 
 | Function | Purpose | Returns |
 | -------- | ------- | ------- |
-| `fulltext_search()` | Search OCR text across all documents | `list[dict]` |
-| `vector_search()` | Find semantically similar documents | `list[dict]` |
-| `fulltext_search_erp()` | Search ERP master data | `list[dict]` |
-| `fulltext_suggestions()` | Autocomplete suggestions | `dict` |
+| `fulltext_search(query, ...)` | Search OCR text across all documents | `list[dict]` |
+| `vector_search(doc_id, ...)` | Find semantically similar documents | `list[dict]` |
+| `fulltext_search_erp(query, ...)` | Search ERP master data | `list[dict]` |
+| `fulltext_suggestions(query, ...)` | Autocomplete suggestions | `dict` |
 
 ---
 
@@ -229,14 +229,14 @@ All four functions automatically check the `OPENSEARCH_ENABLED` preference. If n
 
 ```python
 # This will raise RuntimeError("Fulltext search license is missing")
-results = fulltext_search(org_id, "test")
+results = fulltext_search("test")
 ```
 
 To handle this gracefully in scripts:
 
 ```python
 try:
-    results = fulltext_search(org_id, "test")
+    results = fulltext_search("test")
 except RuntimeError:
     # OpenSearch not enabled for this org — skip search
     results = []
@@ -246,7 +246,8 @@ except RuntimeError:
 
 ```python
 # Search → validate → set field
-results = fulltext_search(org_id, invoice_number,
+invoice_number = get_field_value(document_data, "invoice_id", "")
+results = fulltext_search(invoice_number,
                           status="exported", size=1)
 if results:
     set_field_as_invalid(document_data, "invoice_id",

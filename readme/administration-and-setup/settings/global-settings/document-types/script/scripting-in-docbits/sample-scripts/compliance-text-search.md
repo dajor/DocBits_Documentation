@@ -17,7 +17,7 @@ Searches for compliance-relevant text like "REVERSE CHARGE" in the document arch
 ```python
 # Search for "REVERSE CHARGE" in the organization's document archive
 rc_docs = fulltext_search(
-    org_id, "REVERSE CHARGE",
+    "REVERSE CHARGE",
     search_type="match_phrase",
     doc_type="INVOICE",
     size=5
@@ -32,7 +32,7 @@ if rc_docs:
 ```python
 # Fuzzy search tolerates OCR errors like "REVERS CHARG" or "REVERSE GHARGE"
 rc_fuzzy = fulltext_search(
-    org_id, "REVERSE CHARGE",
+    "REVERSE CHARGE",
     search_type="fuzzy",
     vendor_name="ACME Corp"
 )
