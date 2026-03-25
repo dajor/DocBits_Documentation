@@ -18,6 +18,13 @@ Production-ready script examples for common DocBits automation use cases. Each e
 - [Task for High Amount](task-high-amount.md) — Create approval task for large invoices
 - [Dynamic Required Fields](dynamic-required-fields.md) — Adjust required fields based on currency
 
+### Fulltext & Vector Search
+- [Duplicate Invoice Detection](duplicate-invoice-detection.md) — Find duplicate invoices using fulltext search
+- [Similar Document Detection](similar-document-detection.md) — Flag similar documents using vector search
+- [Compliance Text Search](compliance-text-search.md) — Search for compliance keywords (e.g. Reverse Charge)
+- [ERP Vendor Validation](erp-vendor-validation.md) — Validate vendor against ERP master data
+- [Fill Missing Fields from History](fill-missing-fields-from-history.md) — Auto-fill fields from similar past documents
+
 ### Legacy Examples
 - [Calculating Total Charges](calculating-total-charges-script-for-docbits-1.md) — Sum freight and packaging amounts
 - [Delete Empty Lines](delete-lines-with-empty-quantity-and-amount.md) — Remove rows with zero quantity/amount
