@@ -598,9 +598,10 @@
   * [Supplier Portal (old)](administration-and-setup/setup/supplier-portal-old.md)
   * [Supplier Portal](administration-and-setup/setup/supplier-portal/README.md)
     * [Supplier Registration](administration-and-setup/setup/supplier-portal/supplier-registration.md)
-  * [WatchDog Installation V1](administration-and-setup/setup/watchdog-installation.md)
-  * [WatchDog V2 Configuration](administration-and-setup/setup/watchdog-v2-configuration.md)
-  * [WatchDog Admin FAQ](administration-and-setup/setup/watchdog-admin-faq.md)
+  * [WatchDog](administration-and-setup/setup/watchdog/README.md)
+    * [WatchDog Installation](administration-and-setup/setup/watchdog/watchdog-installation.md)
+    * [WatchDog Configuration](administration-and-setup/setup/watchdog/watchdog-v2-configuration.md)
+    * [WatchDog Admin FAQ](administration-and-setup/setup/watchdog/watchdog-admin-faq.md)
 * [Report Page](administration-and-setup/report-page.md)
 * [Analytics Dashboard](administration-and-setup/analytics-dashboard.md)
 
