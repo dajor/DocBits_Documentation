@@ -1,84 +1,134 @@
-# WatchDog Installation V1
+# WatchDog Installation
 
-## Configuring WatchDog in DocBits
+<figure><img src="../../.gitbook/assets/watchdog-installation-infographic.svg" alt="WatchDog Installation Steps"><figcaption></figcaption></figure>
+
+> **Recommended:** Use the modern setup described below. WatchDog configurations are now created directly in the DocBits application — no local config files needed.
+
+## Prerequisites
+
+* Windows Server or Windows 10/11
+* Administrator access
+* Network connectivity to DocBits API
+* DocBits API Key (available in Settings → WatchDog → General Tab)
+
+## Installation Steps
+
+### 1. Create Required Folders
+
+Create a main directory and subfolders for WatchDog:
+
+```
+C:\WatchDog\              ← WatchDog executable
+C:\WatchDog\Import\       ← Watch folder for incoming documents
+C:\WatchDog\Processed\    ← Success folder for processed documents
+C:\WatchDog\Export\        ← Export folder for exported files
+```
+
+> **Note:** It is recommended to use local paths. UNC network paths (e.g. `\\server\share`) are supported but may require a Polling Observer for reliable file detection.
+
+### 2. Download WatchDog
+
+Download `WatchDog.exe` from the DocBits application:
+
+**Settings → Document Processing → WatchDog → General Tab → Download**
+
+Place the downloaded `WatchDog.exe` file in `C:\WatchDog\`.
+
+### 3. Configure API Connection
+
+Open **Command Prompt (CMD)** as **Administrator** and run:
+
+```powershell
+cd C:\WatchDog
+WatchDog.exe -api YOUR_API_KEY
+```
+
+This connects WatchDog to your DocBits organisation and fetches configurations automatically.
+
+### 4. Install as Windows Service
+
+```powershell
+WatchDog.exe install
+```
+
+### 5. Start the Service
+
+```powershell
+WatchDog.exe start
+```
+
+### 6. Create Configurations in DocBits
+
+Navigate to **Settings → Document Processing → WatchDog → Configurations Tab** in DocBits:
+
+* Click **New Import Configuration** to set up watch folders
+* Click **New Export Configuration** to set up export destinations
+
+> **Important:** Export configurations require a **document type**. All configurations are managed centrally in DocBits, not in local config files.
+
+### 7. Set Automatic Startup
+
+1. Open **Services** (`Win + R` → `services.msc`)
+2. Find **WatchDog** in the service list
+3. Double-click to open properties
+4. Set **Startup Type** to **Automatic (Delayed Start)**
+5. Click **OK**
+
+## Verify Installation
+
+After installation, check the WatchDog status in DocBits:
+
+**Settings → WatchDog → Status Tab**
+
+* ✅ **Online** — WatchDog is connected and sending heartbeats
+* Version, last restart, and system information should be visible
+
+## Command Reference
+
+| Command | Description |
+| :--- | :--- |
+| `WatchDog.exe -api KEY` | Configure API Key |
+| `WatchDog.exe install` | Install as Windows Service |
+| `WatchDog.exe start` | Start the service |
+| `WatchDog.exe stop` | Stop the service |
+| `WatchDog.exe debug` | Run in console mode (for troubleshooting) |
+| `WatchDog.exe remove` | Uninstall the service |
+| `WatchDog.exe --version` | Show current version |
+| `WatchDog.exe --list-folders` | List configured watch folders |
+| `WatchDog.exe --add-folder PATH` | Add a watch folder |
+| `WatchDog.exe --remove-folder PATH` | Remove a watch folder |
+
+---
+
+## Legacy: V1 Configuration (Deprecated)
+
+The following V1 setup method using local config files is **deprecated**. Use the modern API-based setup above instead.
+
+<details>
+<summary>V1 Setup (click to expand)</summary>
+
+### Configuring WatchDog in DocBits (V1)
 
 1. **Access WatchDog Settings**
-   * Navigate to **Settings → Document Processing → WatchDog**.
-2.  **Folder Settings**
+   * Navigate to **Settings → Document Processing → WatchDog**
+2. **Folder Settings**
+   * Define the paths: `C:/WatchDog/Read` and `C:/WatchDog/Processed`
 
-    * Define the paths where WatchDog finds and processes documents.
-    * The folder paths should match those created during installation:
-      * `C:/WatchDog/Read`
-      * `C:/WatchDog/Processed`
+   <figure><img src="../../.gitbook/assets/watchdog_folder_settings.png" alt="WatchDog Folder Settings"><figcaption></figcaption></figure>
 
-    <div data-full-width="true"><figure><img src="../../.gitbook/assets/watchdog_folder_settings.png" alt="WatchDog Folder Settings"><figcaption></figcaption></figure></div>
-
-    * <mark style="color:red;">**Note**</mark>**: It is recommended to use local paths. These should match the folders in the DocBits Installation**
 3. **General Settings**
-   *   Select the document types to process by checking the corresponding checkboxes
+   * Select document types, configure export destination
 
-       <figure><img src="../../.gitbook/assets/watchdog_general_settings_doctypes.png" alt="WatchDog General Settings - Document Types"><figcaption></figcaption></figure>
-   * **Barcode Divider:** When turned on enables the barcode dividing.
-   * **DocBits Operator:** When enabled opens a chrome browser in the background for the DocBits Operator.
-   *   **Export destination:** Sets the export destination.&#x20;
+   <figure><img src="../../.gitbook/assets/watchdog_general_settings_doctypes.png" alt="WatchDog General Settings"><figcaption></figcaption></figure>
 
-       * **Infor:** Documnets get exported to Infor.
-       * **Enaoi Export:** Documents get exported to a defined folder that can be configured below.&#x20;
-
-       <figure><img src="../../.gitbook/assets/watchdog_export_destination_settings.png" alt="WatchDog Export Destination Settings"><figcaption></figcaption></figure>
-
-       * <mark style="color:red;">**Note:**</mark> **For XSLT configuration, please consult your project manager.**
 4. **Export Configurations**
-   * Displays all configured exports for **on-premise processing**.
-   *   Shows the timestamp of the **last successful connection** for each configuration.
+   * Shows configured exports for on-premise processing
 
-       <figure><img src="../../.gitbook/assets/watchdog_export_configurations_list.png" alt="WatchDog Export Configurations List"><figcaption></figcaption></figure>
-5.  **bod\_mapping Configuration (Optional)**
+   <figure><img src="../../.gitbook/assets/watchdog_export_configurations_list.png" alt="WatchDog Export Configurations"><figcaption></figcaption></figure>
 
-    * <mark style="color:red;">**Required Fields:**</mark> Before adding custom metadata mappings, you **must** define the following two values:
-      * **`file_name`**&#x20;
-      * **`pdf_path`**&#x20;
-    * Click **Add Row** to define metadata mappings.
+5. **Download Configuration**
+   * Download `watchdog-config.json` and place in `C:\WatchDog\`
 
-    <figure><img src="../../.gitbook/assets/watchdog_bod_mapping_config.png" alt="WatchDog BOD Mapping Configuration"><figcaption></figcaption></figure>
+   <figure><img src="../../.gitbook/assets/watchdog_download_configuration.png" alt="Download Configuration"><figcaption></figcaption></figure>
 
-    * **Value:** Specifies the field name for the metadata.
-    * **Path:** The XPath expression pointing to the XML data that should be assigned to the field.
-    * **Trashcan Icon:** Used to delete a secific row.
-6. **Download the Configuration**&#x20;
-   * Save the configuration&#x20;
-   *   Download the configuration
-
-       <figure><img src="../../.gitbook/assets/watchdog_download_configuration.png" alt="Download WatchDog Configuration"><figcaption></figcaption></figure>
-
-## WatchDog Installation Guide
-
-1. **Create Required Folders**
-   * Create a main directory: `C:/WatchDog`
-   * Inside `C:/WatchDog`, create the following subfolders:
-     * `C:/WatchDog/Read`
-     * `C:/WatchDog/Processed`
-   * <mark style="color:red;">**Note**</mark>**: It is recommended to use local paths. These should match the folders in the DocBits Configuration**
-2. **Download WatchDog**
-   * Download the latest version of `WatchDog.exe` from: [https://github.com/Fellow-Consulting-AG/WatchDog](https://github.com/Fellow-Consulting-AG/WatchDog)
-   * Place the downloaded `WatchDog.exe` file in `C:/WatchDog`.
-   * Place the downloaded `watchdog-config.json` file in `C:/WatchDog`.
-   * open the `watchdog-config.json.` and change the **config\_path.**&#x20;
-   * In this example:
-     * `"config_path": "C:/WatchDog/watchdog-config.json"`
-3. **Install WatchDog**
-   * Open **Command Prompt (CMD)** with **Administrator rights**.
-   * Navigate to the WatchDog folder&#x20;
-   *   Run the following command to install WatchDog:
-
-       `WatchDog.exe install`
-4. **Start the WatchDog Service**
-   *   Run the following command in CMD:
-
-       `WatchDog.exe start`
-5. **Set Startup Type**
-   * Open **Services** (Press `Win + R`, type `services.msc`, and press **Enter**).
-   * Locate **WatchDog** in the service list.
-   * Double-click to open its properties.
-   * Set **Startup Type** to **Automatic (Delayed Start)**.
-   * Click **OK**.
+</details>
