@@ -2,6 +2,8 @@
 
 <figure><img src="../../.gitbook/assets/watchdog-overview-infographic.svg" alt="WatchDog Overview"><figcaption></figcaption></figure>
 
+<figure><img src="../../.gitbook/assets/watchdog-infographic-en.png" alt="WatchDog Infographic"><figcaption></figcaption></figure>
+
 **WatchDog** is a Windows-based on-premise service that monitors local folders for incoming documents, uploads them to the DocBits Cloud for processing, and exports finished documents back to local folders or ERP systems.
 
 ## Key Features
