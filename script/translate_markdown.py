@@ -50,6 +50,53 @@ def list_available_models():
         logging.error(f"Error fetching models: {e}")
         sys.exit(1)
 
+def estimate_tokens(text):
+    """Estimate token count for a given text."""
+    return len(text.split()) * 1.5
+
+def chunk_text(text, max_tokens, overlap=100):
+    """
+    Split text into chunks that fit within token limit.
+    Tries to split at paragraph boundaries (double newlines).
+    """
+    chunks = []
+    paragraphs = text.split('\n\n')
+    current_chunk = []
+    current_tokens = 0
+    
+    for para in paragraphs:
+        para_tokens = estimate_tokens(para)
+        if para_tokens > max_tokens * 0.9:
+            # Paragraph itself is too large, split by lines
+            lines = para.split('\n')
+            temp_chunk = []
+            temp_tokens = 0
+            for line in lines:
+                line_tokens = estimate_tokens(line)
+                if temp_tokens + line_tokens > max_tokens * 0.9:
+                    chunks.append('\n'.join(temp_chunk))
+                    temp_chunk = [line]
+                    temp_tokens = line_tokens
+                else:
+                    temp_chunk.append(line)
+                    temp_tokens += line_tokens
+            if temp_chunk:
+                chunks.append('\n'.join(temp_chunk))
+        elif current_tokens + para_tokens > max_tokens * 0.9:
+            # Save current chunk and start new one
+            if current_chunk:
+                chunks.append('\n\n'.join(current_chunk))
+            current_chunk = [para]
+            current_tokens = para_tokens
+        else:
+            current_chunk.append(para)
+            current_tokens += para_tokens
+    
+    if current_chunk:
+        chunks.append('\n\n'.join(current_chunk))
+    
+    return chunks
+
 def translate_text(text, target_lang, model):
     # Set up your OpenAI API key
     openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -158,26 +205,43 @@ def main():
     with open(args.input_file, 'r', encoding='utf-8') as f:
         markdown_text = f.read()
 
-    # Check if the content exceeds token limits
+    # Check if the content exceeds token limits and handle chunking
     approx_tokens = len(markdown_text.split()) * 1.5  # Approximate token count
     model_token_limits = {
         'gpt-3.5-turbo': 4096,
         'gpt-3.5-turbo-16k': 16384,
         'gpt-4': 8192,
         'gpt-4-32k': 32768,
+        'gpt-4o-mini-2024-07-18': 4096,
+        'gpt-4o-mini': 4096,
+        'gpt-4o': 128000,
     }
     max_tokens = model_token_limits.get(args.model, 4096)
 
+    # Use chunking for large files instead of failing
     if approx_tokens > max_tokens:
-        logging.error(f"The input file is too large for the selected model ({args.model}).")
-        logging.error(f"Approximate tokens: {approx_tokens}, Model limit: {max_tokens}")
-        sys.exit(1)
-
-    try:
-        translated_markdown = translate_markdown(markdown_text, args.language, args.model)
-    except Exception as e:
-        logging.error(f"An error occurred during translation:\n\n{e}")
-        sys.exit(1)
+        logging.warning(f"File exceeds token limit ({approx_tokens:.0f} > {max_tokens}). Chunking enabled.")
+        chunks = chunk_text(markdown_text, max_tokens)
+        logging.info(f"Split file into {len(chunks)} chunks for translation.")
+        
+        translated_chunks = []
+        for i, chunk in enumerate(chunks, 1):
+            logging.info(f"Translating chunk {i}/{len(chunks)}...")
+            try:
+                translated_chunk = translate_markdown(chunk, args.language, args.model)
+                translated_chunks.append(translated_chunk)
+            except Exception as e:
+                logging.error(f"Error translating chunk {i}: {e}")
+                raise
+        
+        # Join translated chunks
+        translated_markdown = '\n\n'.join(translated_chunks)
+    else:
+        try:
+            translated_markdown = translate_markdown(markdown_text, args.language, args.model)
+        except Exception as e:
+            logging.error(f"An error occurred during translation:\n\n{e}")
+            sys.exit(1)
 
     logging.info("Translation process completed.")
 
