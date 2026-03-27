@@ -262,7 +262,7 @@ def main():
     parser.add_argument('language', nargs='?', help='Target language (e.g., "French")')
     parser.add_argument('input_file', nargs='?', help='Input Markdown file')
     parser.add_argument('output_file', nargs='?', help='Output Markdown file', default=None)
-    parser.add_argument('--model', help='OpenAI model to use (default: gpt-3.5-turbo)', default='gpt-3.5-turbo')
+    parser.add_argument('--model', help='OpenAI model to use (default: gpt-4o-2024-08-06)', default='gpt-4o-2024-08-06')
     parser.add_argument('--list-models', action='store_true', help='List available OpenAI models and exit')
     parser.add_argument('--debug', action='store_true', help='Enable debug logging')
     parser.add_argument('--chunk-size', type=int, help='Override chunk size in tokens (default: auto based on model)', default=None)
@@ -327,11 +327,13 @@ def main():
         'gpt-3.5-turbo-16k': 0.003,       # $0.003 per 1K tokens
         'gpt-4': 0.03,                    # $0.03 per 1K tokens
         'gpt-4-32k': 0.06,                # $0.06 per 1K tokens
-        # Add other models as needed
+        'gpt-4o-mini': 0.00015,           # $0.00015 per 1K tokens
+        'gpt-4o': 0.005,                  # $0.005 per 1K tokens
+        'gpt-4o-2024-08-06': 0.005,       # $0.005 per 1K tokens
     }
 
     # Determine price per 1K tokens
-    model_price_per_1k = pricing.get(args.model, 0.002)  # Default to $0.002 per 1K tokens
+    model_price_per_1k = pricing.get(args.model, 0.005)  # Default to $0.005 per 1K tokens
 
     # Calculate cost in USD
     cost_usd = (total_tokens_used / 1000) * model_price_per_1k
