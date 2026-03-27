@@ -9,8 +9,8 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: ${{ github.ref }}
-  cancel-in-progress: true
+  group: translate-${{ github.ref }}-${{ env.LANGUAGE }}
+  cancel-in-progress: false
 
 jobs:
   translate-markdown:
@@ -88,7 +88,7 @@ jobs:
           if git show-ref --verify --quiet refs/heads/$BRANCH; then
             echo "'$BRANCH' branch exists. Checking out."
             git checkout $BRANCH
-            git pull origin $BRANCH
+            git pull --rebase origin $BRANCH
           else
             echo "'$BRANCH' branch does not exist. Creating from 'main'."
             git checkout -b $BRANCH
@@ -111,19 +111,20 @@ jobs:
             export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
             # Use gpt-4o which handles both small and large files (128k context)
             # Script auto-switches from gpt-4o-mini to gpt-4o if file exceeds 4096 tokens
-            python ./script/translate_markdown.py "$LANGUAGE" "$file" "$output_file" --model gpt-4o
+            python ./script/translate_markdown.py "$LANGUAGE" "$file" "$output_file" --model gpt-4o-2024-08-06
           done
 
       - name: Commit and Push Translated Files
         run: |
-          # Check for any translated files to commit
-          git add *_de.md
+          # Pull latest changes from remote BEFORE committing to avoid race condition with concurrent workflows
+          # This prevents "non-fast-forward" errors when multiple language workflows run simultaneously
+          git pull --rebase origin $BRANCH
+
+          # Stage ALL translated files (including subdirectories like readme/SUMMARY_de.md)
+          git add -- '*_de.md'
 
           # Commit if there are changes
           git commit -m "Add Dutch translations for updated Markdown files" || echo "No changes to commit"
 
-          # Pull latest changes from remote to avoid race condition with concurrent workflows
-          git pull --rebase origin $BRANCH
-
-          # Push the changes back to the main branch
+          # Push the changes back to the target branch
           git push origin $BRANCH
