@@ -114,11 +114,15 @@ jobs:
 
       - name: Commit and Push Translated Files
         run: |
+          # Pull latest changes from remote BEFORE pushing to avoid race condition with concurrent workflows
+          # This prevents "non-fast-forward" errors when multiple language workflows run simultaneously
+          git pull --rebase origin $BRANCH
+
           # Check for any translated files to commit
           git add *_de.md
 
           # Commit if there are changes
           git commit -m "Add German translations for updated Markdown files" || echo "No changes to commit"
 
-          # Push the changes back to the main branch
-          git push origin de
+          # Push the changes back to the target branch
+          git push origin $BRANCH
