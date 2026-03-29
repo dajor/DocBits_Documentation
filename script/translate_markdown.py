@@ -220,22 +220,31 @@ def main():
 
     # Use chunking for large files instead of failing
     if approx_tokens > max_tokens:
-        logging.warning(f"File exceeds token limit ({approx_tokens:.0f} > {max_tokens}). Chunking enabled.")
-        chunks = chunk_text(markdown_text, max_tokens)
-        logging.info(f"Split file into {len(chunks)} chunks for translation.")
+        # Auto-switch to gpt-4o (128k limit) if file exceeds 4096 tokens and we're using gpt-4o-mini
+        if args.model in ['gpt-4o-mini-2024-07-18', 'gpt-4o-mini'] and approx_tokens <= 128000:
+            logging.warning(f"File exceeds {args.model} limit ({approx_tokens:.0f} > {max_tokens}). Auto-switching to gpt-4o (128k limit).")
+            args.model = 'gpt-4o'
+            max_tokens = 128000
+            logging.info(f"Using gpt-4o for large file translation.")
         
-        translated_chunks = []
-        for i, chunk in enumerate(chunks, 1):
-            logging.info(f"Translating chunk {i}/{len(chunks)}...")
-            try:
-                translated_chunk = translate_markdown(chunk, args.language, args.model)
-                translated_chunks.append(translated_chunk)
-            except Exception as e:
-                logging.error(f"Error translating chunk {i}: {e}")
-                raise
-        
-        # Join translated chunks
-        translated_markdown = '\n\n'.join(translated_chunks)
+        # If still exceeds limit (or not using gpt-4o-mini), use chunking
+        if approx_tokens > max_tokens:
+            logging.warning(f"File exceeds token limit ({approx_tokens:.0f} > {max_tokens}). Chunking enabled.")
+            chunks = chunk_text(markdown_text, max_tokens)
+            logging.info(f"Split file into {len(chunks)} chunks for translation.")
+            
+            translated_chunks = []
+            for i, chunk in enumerate(chunks, 1):
+                logging.info(f"Translating chunk {i}/{len(chunks)}...")
+                try:
+                    translated_chunk = translate_markdown(chunk, args.language, args.model)
+                    translated_chunks.append(translated_chunk)
+                except Exception as e:
+                    logging.error(f"Error translating chunk {i}: {e}")
+                    raise
+            
+            # Join translated chunks
+            translated_markdown = '\n\n'.join(translated_chunks)
     else:
         try:
             translated_markdown = translate_markdown(markdown_text, args.language, args.model)
