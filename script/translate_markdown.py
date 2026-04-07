@@ -158,20 +158,26 @@ def main():
     with open(args.input_file, 'r', encoding='utf-8') as f:
         markdown_text = f.read()
 
-    # Check if the content exceeds token limits
+    # Check if the content exceeds token limits and auto-switch model if needed
     approx_tokens = len(markdown_text.split()) * 1.5  # Approximate token count
     model_token_limits = {
         'gpt-3.5-turbo': 4096,
         'gpt-3.5-turbo-16k': 16384,
         'gpt-4': 8192,
         'gpt-4-32k': 32768,
+        'gpt-4o': 128000,
+        'gpt-4o-mini-2024-07-18': 4096,
+        'gpt-4o-mini': 4096,
     }
     max_tokens = model_token_limits.get(args.model, 4096)
 
+    # Auto-switch to gpt-4o if file exceeds current model's token limit
     if approx_tokens > max_tokens:
-        logging.error(f"The input file is too large for the selected model ({args.model}).")
-        logging.error(f"Approximate tokens: {approx_tokens}, Model limit: {max_tokens}")
-        sys.exit(1)
+        logging.warning(f"Input file exceeds {args.model} token limit (approx {approx_tokens} tokens, limit {max_tokens}).")
+        logging.warning(f"Auto-switching to gpt-4o (128k token limit).")
+        args.model = 'gpt-4o'
+        max_tokens = model_token_limits.get(args.model, 128000)
+        logging.info(f"Using model: {args.model} (limit: {max_tokens} tokens)")
 
     try:
         translated_markdown = translate_markdown(markdown_text, args.language, args.model)
@@ -201,6 +207,9 @@ def main():
         'gpt-3.5-turbo-16k': 0.003,       # $0.003 per 1K tokens
         'gpt-4': 0.03,                    # $0.03 per 1K tokens
         'gpt-4-32k': 0.06,                # $0.06 per 1K tokens
+        'gpt-4o': 0.05,                   # $0.05 per 1K tokens
+        'gpt-4o-mini-2024-07-18': 0.00015, # $0.00015 per 1K tokens
+        'gpt-4o-mini': 0.00015,           # $0.00015 per 1K tokens
         # Add other models as needed
     }
 

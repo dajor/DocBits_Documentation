@@ -120,5 +120,8 @@ jobs:
           # Commit if there are changes
           git commit -m "Add German translations for updated Markdown files" || echo "No changes to commit"
 
-          # Push the changes back to the main branch
+          # Pull latest changes before pushing to avoid race condition
+          git pull --rebase origin $BRANCH
+
+          # Push the changes back to the de branch
           git push origin de
