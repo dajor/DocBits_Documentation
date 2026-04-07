@@ -169,9 +169,11 @@ def main():
     max_tokens = model_token_limits.get(args.model, 4096)
 
     if approx_tokens > max_tokens:
-        logging.error(f"The input file is too large for the selected model ({args.model}).")
-        logging.error(f"Approximate tokens: {approx_tokens}, Model limit: {max_tokens}")
-        sys.exit(1)
+        # Auto-switch to gpt-4o for large files instead of failing
+        logging.warning(f"Input file ({approx_tokens:.0f} tokens) exceeds {args.model} limit ({max_tokens} tokens).")
+        logging.warning(f"Auto-switching to gpt-4o (128k token limit) for this translation.")
+        args.model = 'gpt-4o'
+        logging.info(f"Using model: {args.model}")
 
     try:
         translated_markdown = translate_markdown(markdown_text, args.language, args.model)
